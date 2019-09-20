@@ -5,25 +5,26 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use App\Traits\UserTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use HasRoles;
-    use UserTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+
+    public $timestamps = true;
+    protected $table = 'playsms_tblUser';
+    protected $primaryKey = 'uid';
     protected $fillable = [
-        'name', 'email', 'password',
+        'email','name', 'password',
     ];
 
-    protected $appends = ['allPermissions', 'profilelink', 'avatarlink', 'isme'];
+    const CREATED_AT = 'register_datetime';
+    const UPDATED_AT = 'lastupdate_datetime';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,14 +43,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function getAllpermissionsAttribute()
-    {   $res = [];
-        $allPermissions = $this->getAllPermissions();
-        foreach($allPermissions as $p)
-        {
-            $res[] = $p->name;
-        }
-        return $res;
-    }
 }

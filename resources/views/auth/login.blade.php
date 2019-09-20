@@ -1,23 +1,18 @@
 @extends('layouts.auth-master')
 
 @section('content')
-<div class="card card-primary">
+<div class="card card-info">
   <div class="card-header"><h4>Login</h4></div>
 
   <div class="card-body">
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{route('masuk')}}">
         @csrf
       <div class="form-group">
         <label for="email">Email</label>
-        <input aria-describedby="emailHelpBlock" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Registered email address" tabindex="1" value="{{ old('email') }}" autofocus>
+        <input aria-describedby="emailHelpBlock" id="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Registered email address" tabindex="1" value="{{ old('email') }}" autofocus>
         <div class="invalid-feedback">
           {{ $errors->first('email') }}
         </div>
-        @if(App::environment('demo'))
-        <small id="emailHelpBlock" class="form-text text-muted">
-            Demo Email: admin@example.com
-        </small>
-        @endif
       </div>
 
       <div class="form-group">
@@ -33,11 +28,6 @@
         <div class="invalid-feedback">
           {{ $errors->first('password') }}
         </div>
-        @if(App::environment('demo'))
-        <small id="passwordHelpBlock" class="form-text text-muted">
-            Demo Password: 1234
-        </small>
-        @endif
       </div>
 
       <div class="form-group">
@@ -48,7 +38,7 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+        <button type="submit" class="btn btn-info btn-lg btn-block" tabindex="4">
           Login
         </button>
       </div>

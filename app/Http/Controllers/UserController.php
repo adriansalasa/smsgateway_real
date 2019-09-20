@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize(User::class, 'index');
+        // $this->authorize(User::class, 'index');
         if($request->ajax())
         {
             $users = new User;
