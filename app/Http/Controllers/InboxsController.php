@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Auth;
 
+
 class InboxsController extends Controller
 {
     /**
@@ -69,9 +70,23 @@ class InboxsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function view($id)
     {
-        //
+        $update = Inbox::where('in_id', $id)
+            ->update([
+               'read_status' => '1'
+            ]);
+        $data = Inbox::where('in_id', $id)->first();
+        return view('admin.inbox.view', compact('data','id'));
+    }
+
+    public function read($id)
+    {
+        $update = Inbox::where('in_uid', $id)
+            ->update([
+               'read_status' => '1'
+            ]);
+        return redirect(route('admin.inbox'))->with('status', 'Pesan telah dibaca semua');
     }
 
     /**

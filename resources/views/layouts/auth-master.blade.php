@@ -73,7 +73,7 @@
 
             <div class="simple-footer">
 
-              Copyright &copy; {{ env('APP_NAME') }} {{ date('Y') }}
+              Copyright &copy;  <a href="http://www.grahamitrateguh.com/">PT. Graha Mitra Teguh</a> {{ date('Y') }}
 
             </div>
 

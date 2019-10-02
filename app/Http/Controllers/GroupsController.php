@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Session;
 use App\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,7 @@ class GroupsController extends Controller
      */
     public function create()
     {
-        return view('kontak.group.create');
+        return view('admin.kontak.group.create');
     }
 
     /**
@@ -49,18 +50,34 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
+        $idnya = Auth::user()->uid;
+
         $request->validate([
             'name' => 'required',
             'code' => 'required'
         ]);
 
         Group::create([
-            'uid' => Session::get('uid'),
+            'uid' => $idnya,
             'name' => $request->name,
             'code' => $request->code
         ]);
 
-        return redirect('/group')->with('status', 'Group berhasil ditambahkan');
+        // return view('admin.kontak.group.index')->with('status', 'Group berhasil ditambahkan');
+
+        if(!isset($request->total)){$request->total = '20';}
+            if(!isset($request->page)){$request->page = '1';}
+            
+            $groups = DB::table('playsms_featurePhonebook_group')
+            ->LeftJoin('playsms_featurePhonebook_group_contacts', 'playsms_featurePhonebook_group.id', '=', 'playsms_featurePhonebook_group_contacts.gpid')
+            ->select('playsms_featurePhonebook_group.*', DB::raw('count(playsms_featurePhonebook_group.id) as total'))->groupBy('playsms_featurePhonebook_group.id')
+            ->where('playsms_featurePhonebook_group.uid', '=', Auth::user()->uid)
+            ->whereRaw('(playsms_featurePhonebook_group.name like "%'.$request->keyword.'%" OR playsms_featurePhonebook_group.code like "%'.$request->keyword.'%")')
+            ->paginate($request->total)
+            ->appends($request->only('keyword'))
+            ->appends($request->only('total'));
+
+            return view('admin.kontak.group.index', compact('groups', 'request'));
     }
 
     /**
@@ -80,9 +97,10 @@ class GroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit($group)
     {
-        return view('groups.edit', compact('group'));
+        $detail = Group::where('id', $group)->first();
+        return view('admin.kontak.group.edit', compact('detail','group'));
     }
 
     /**
@@ -92,14 +110,27 @@ class GroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->id;
         DB::table('playsms_featurePhonebook_group')->where('id',$id)->update([
             'name' => $request->name,
             'code' => $request->code
         ]);
 
-        return redirect('/group')->with('status', 'group berhasil diubah');
+        if(!isset($request->total)){$request->total = '20';}
+        if(!isset($request->page)){$request->page = '1';}
+        
+        $groups = DB::table('playsms_featurePhonebook_group')
+        ->LeftJoin('playsms_featurePhonebook_group_contacts', 'playsms_featurePhonebook_group.id', '=', 'playsms_featurePhonebook_group_contacts.gpid')
+        ->select('playsms_featurePhonebook_group.*', DB::raw('count(playsms_featurePhonebook_group.id) as total'))->groupBy('playsms_featurePhonebook_group.id')
+        ->where('playsms_featurePhonebook_group.uid', '=', Auth::user()->uid)
+        ->whereRaw('(playsms_featurePhonebook_group.name like "%'.$request->keyword.'%" OR playsms_featurePhonebook_group.code like "%'.$request->keyword.'%")')
+        ->paginate($request->total)
+        ->appends($request->only('keyword'))
+        ->appends($request->only('total'));
+
+        return redirect(route('admin.group'))->with('groups', 'request');
     }
 
     /**
@@ -111,18 +142,16 @@ class GroupsController extends Controller
     public function destroy(Group $group)
     {
         Group::destroy($group->id);
-        return redirect('/group')->with('status', 'group berhasil dihapus');
+        return redirect(route('admin.group'))->with('status', 'Pesan berhasil dihapus');
     }
 
-    protected function deletes(Request $request)
-    {
-        // return route('logins');
-        $Groups_id_array = $request->input('id');
+    public function deletes(Request $request){
+        $Group_id_array = $request->input('id');
 
-        $Group = Group::whereIn('id', $Groups_id_array);
+        $Group = Group::whereIn('id', $Group_id_array);
         if($Group->delete())
         {
-            echo 'Groups berhasil dihapus';
+            echo 'Data berhasil dihapus';
         }
     }
 }

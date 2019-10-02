@@ -112,7 +112,7 @@ Inbox
 
                       <th  style="width:20%">Tanggal</th>
 
-                      <th style="width:10%">Action</th>
+                      <th colspan="2" style="width:10%" class="text-center">Action</th>
 
                     </tr>
 
@@ -139,9 +139,11 @@ Inbox
                       <td>{{$item->in_sender}}</td>
 
                       <td class="align-middle">
-
-                          {{$item->in_msg}}
-
+                        @if($item->read_status==0)
+                          <a class="text-danger" href="{{url('pesan/inbox/view/'.$item->in_id)}}">{{substr($item->in_msg, 0,40)}}...</a>
+                        @else
+                          <a href="{{url('pesan/inbox/view/'.$item->in_id)}}">{{substr($item->in_msg, 0,40)}}...</a>
+                        @endif
                       </td>
 
                       <td>
@@ -150,7 +152,7 @@ Inbox
 
                       </td>
 
-                      <td>
+                      <td class="text-center">
 
                           <form class="delete" action="/pesan/inbox/{{ $item->in_id }}" method="POST" class="d-inline">
 
@@ -159,7 +161,8 @@ Inbox
                             @csrf
 
                         <a href="/pesan/{{ $item->in_id }}/replay" class="text-success" title="Balas"><i class="fa fa-reply" ></i></a>
-
+                      </td>
+                      <td class="text-center">
                         <button type="submit" class="btn btn-link text-danger" title="Hapus" onclick="return confirm('Apakah Anda akan menghapus?')"><i class="fa fa-trash"></i></button>
 
                       </form>

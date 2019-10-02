@@ -1,3 +1,13 @@
+
+     <!--  <audio src="{{url('sound/Bell.mp3')}}"
+            autoplay="autoplay" hidden="true">      
+      </audio> -->      
+<!DOCTYPE html>
+<html>
+<body>     
+    <!--   <iframe src="https://s3.amazonaws.com/Syntaxxx/bigger-picture.mp3" allow="autoplay" 
+      style="display:none" id="iframeAudio">
+      </iframe>  -->
 <form class="form-inline mr-auto" action="{{ route('admin.users') }}">
 
   <ul class="navbar-nav mr-3">
@@ -24,51 +34,130 @@
 
 <ul class="navbar-nav navbar-right">
 
-  <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg{{ Auth::user()->unreadNotifications->count() ? ' beep' : '' }}"><i class="far fa-bell"></i></a>
+  @if(Auth::user()->uid == '1')
+ <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+   <li class="dropdown dropdown-list-toggle">    
 
-    <div class="dropdown-menu dropdown-list dropdown-menu-right">
+     @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitems)
+          
+      @if ($JmlNotifitems->cntNotif > 0 )     
+      <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
+      <i class="fa fa-bell text-warning"></i>
+      <label class="ml-2">{{ $JmlNotifitems->cntNotif}} New Notification</label>
+      </a>         
 
-      <div class="dropdown-header">Notifications
+      <!-- <audio controls>
+        <source src="Bell.mp3">          
+      </audio> -->     
+
+       <iframe src="{{url('sound/Bell.mp3')}}" allow="autoplay" 
+      style="display:none" id="iframeAudio">
+      </iframe>       
+          
+      @else   
+      <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
+      <i class="fa fa-bell"></i>
+      </a>
+      @endif
+      @endforeach
+
+      <div class="dropdown-menu dropdown-list dropdown-menu-right">
+
+        <div class="dropdown-header">Notification</div>  
+
+          <div class="dropdown-list-content dropdown-list-icons">             
+
+              @foreach(App\buycredit::SELECT('idTagihan', 'username', 'noTelp', 'nominal',
+              DB::raw("CONCAT('Request pengisian paket',' ', Playsms_BuyCredit.nominal) AS detailMessages"), 
+              'createDt')->JOIN('playsms_tblUser', 'idUser', '=', 'uid')->where('confirmYn', 'N')->orderBy('createDt', 'DESC')->get() as $Notifitems)
+
+              <!-- <a href="{{url('notification/view/'.$Notifitems->idTagihan)}}" class="dropdown-item  -->
+                <a href="{{url('notification')}}" class="dropdown-item dropdown-item-unread">
+
+                <div class="dropdown-item-icon bg-danger text-white">
+
+                  <i class="fas fa-user"></i>                  
+
+                </div>
+
+                <div class="dropdown-item-desc">
+                  
+                  {{ substr($Notifitems->detailMessages, 0,35) }}
+
+                  <div class="time text-primary">{{$Notifitems->createDt}}</div>
+
+                </div>
+
+              </a>
+              @endforeach
+              
+              
+          </div>
+
+      </div>
+
+  </li>
+  @endif
+
+  <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg{{ Auth::user()->unreadNotifications->count() ? ' beep' : '' }}"><!-- <i class="far fa-bell"></i> -->
+
+     @if(Auth::user()->uid == '1')
+
+     <i class="fa fa-envelope"></i>
+
+     @else
+
+     <i class="far fa-bell"></i>
+
+     @endif
+
+  </a>
+
+    <div class="dropdown-menu dropdown-list dropdown-menu-right">     
+
+      <div class="dropdown-header">
+          @if(Auth::user()->uid == '1')
+              Messages
+          @else
+              Notifications
+          @endif
 
         <div class="float-right">
 
-          <a href="#">Mark All As Read</a>
+          <a href="{{url('pesan/inbox/read/'.Auth::user()->uid)}}">Mark All As Read</a>
 
         </div>
 
       </div>
 
       <div class="dropdown-list-content dropdown-list-icons">
+        @if(App\Inbox::select('in_id', 'in_sender', 'in_msg', 'in_datetime')->where('read_status', 0)->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->count() == 0)
+        <p class="text-muted p-2 text-center">No notifications found!</p>
+        @else
 
-        @if(Auth::user()->unreadNotifications->count())
+        @foreach(App\Inbox::select('in_id', 'in_sender', 'in_msg', 'in_datetime')->where('read_status', 0)->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->get() as $items)
 
-        @for($i = 1; $i < 40; $i++)
-
-        <a href="#" class="dropdown-item dropdown-item-unread">
+        <a href="{{url('pesan/inbox/view/'.$items->in_id)}}" class="dropdown-item dropdown-item-unread">
 
           <div class="dropdown-item-icon bg-primary text-white">
 
-            <i class="fas fa-code"></i>
+            <i class="fas fa-user"></i>
 
           </div>
 
           <div class="dropdown-item-desc">
 
-            Template update is available now!
+            {{substr($items->in_msg, 0,35)}}...
 
-            <div class="time text-primary">2 Min Ago</div>
+            <div class="time text-primary">{{$items->in_datetime}}</div>
 
           </div>
 
         </a>
 
-        @endfor
-
-        @else
-
-        <p class="text-muted p-2 text-center">No notifications found!</p>
-
+        @endforeach
         @endif
+
 
     </div>
 
@@ -103,4 +192,5 @@
   </li>
 
 </ul>
-
+</body>
+</html>

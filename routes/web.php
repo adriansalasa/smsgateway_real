@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 
 Route::get('/', function() {
 
@@ -30,9 +31,30 @@ Route::get('/aktifasi', 'ActivationController@aktifasi');
 
 Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
+    Route::get('topup', 'topupcontroller@index')->name('topup');
+
+    Route::POST('topup', 'confirmcontroller@store');    
+    
+    Route::POST('topup/payment', 'paymentcontroller@index');
+
+    Route::POST('topup/confirm', 'confirmcontroller@index');
+
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
     Route::get('users', 'UserController@index')->name('users');
+
+    Route::get('notification', 'notificationcontroller@index')->name('notification');    
+
+    Route::get('notification/view/{id}', 'notificationcontroller@show');    
+
+    Route::POST('notification/{id}', 'notificationcontroller@update');
+
+    Route::POST('notification', 'notificationcontroller@updates')->name('multiconfirms');
+
+    Route::delete('notification', 'notificationcontroller@deletes')->name('notifdeletes');
+
+    Route::put('notification/{id}', 'notificationcontroller@destroy')->name('remove');
+
 
     // user
     Route::group(['prefix'=>'profile'], function(){
@@ -87,7 +109,7 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
         Route::get('/{group}/edit', 'GroupsController@edit');
 
-        Route::put('/{group}', 'GroupsController@update');
+        Route::post('update', 'GroupsController@update');
 
         Route::post('/deletes', 'GroupsController@deletes');
 
@@ -115,6 +137,25 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
         Route::post('/inbox/deletes', 'InboxsController@deletes')->name('inbox_deletes');
 
+        Route::get('/inbox/view/{id}', 'InboxsController@view');
+        
+        Route::get('/inbox/read/{id}', 'InboxsController@read');
+
+
+
+        Route::get('/template', 'TemplateController@index')->name('template');
+
+        Route::get('/template/add', 'TemplateController@add')->name('add-template');
+
+        Route::post('/template/add', 'TemplateController@add_post')->name('kirim-template');
+
+        Route::get('template/edit/{id}', 'TemplateController@edit');
+
+        Route::post('/template/update', 'TemplateController@update')->name('update-template');
+
+        Route::delete('/template/{template}', 'TemplateController@destroy')->name('destroy_template');
+
+        Route::post('/template/deletes', 'TemplateController@deletes')->name('template_deletes');
 
 
         Route::get('/outbox', 'OutboxsController@index')->name('outbox');
@@ -148,6 +189,10 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
         ]
 
     ]);
+
+
+    
+
 
 });
 

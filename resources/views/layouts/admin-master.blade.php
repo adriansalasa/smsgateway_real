@@ -8,7 +8,9 @@
 
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 
-  <title>@yield('title', 'Test Laravel') &mdash; {{ env('APP_NAME') }}</title>
+  <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+
+  <title>@yield('title', 'Test Laravel') &mdash; SMS Bersama</title>
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -28,13 +30,13 @@
 
   <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/combobox/select2.css') }}" />
 
-  <link rel="stylesheet" href="{{ asset('assets/css/jquery-selectric/selectric.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/selectric.css') }}">
 
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker.min.css') }}">
 
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-tagsinput.css') }}">
 
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-tagsinput/dist/summernote-bs4.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/summernote-bs4.css') }}">
 
 
 
@@ -72,6 +74,16 @@
 
         }
 
+        #loading {
+          background: url("{{asset('assets/img/gmt/SMS3.gif')}}") no-repeat center center;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          z-index: 9999999;
+      }
+
   </style>
 
 </head>
@@ -79,7 +91,7 @@
 
 
 <body>
-
+  <div id="loading"></div>
   <div id="app">
 
     <div class="main-wrapper">
@@ -142,7 +154,16 @@
 
   <script src="{{ asset('assets/js/summernote-bs4.js') }}"></script>
 
-  
+  <script type="text/javascript">
+    function hideLoader() {
+    $('#loading').hide();
+    }
+
+    $(window).ready(hideLoader);
+
+    // Strongly recommended: Hide loader after 20 seconds, even if the page hasn't finished loading
+    setTimeout(hideLoader, 20 * 1000);
+  </script>
 
   @yield('scripts')
 
