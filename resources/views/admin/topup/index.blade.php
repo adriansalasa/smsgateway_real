@@ -194,7 +194,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"> 
   $(document).ready( function() {
-    $('#disappear').delay(3000).fadeOut();
+    $('#disappear').delay(2000).fadeOut();
   });
 </script>
 

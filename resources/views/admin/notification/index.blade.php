@@ -322,7 +322,7 @@
                 success:function(data)
 
                 {
-                  
+                   
                   alert(data);                   
                   window.location = "{{ route('admin.notification') }}";                  
 

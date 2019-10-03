@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\user_get;
 use App\buycredit;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,11 +37,11 @@ class confirmcontroller extends Controller
     	DB::table('Playsms_BuyCredit')->insert([
     		'nomor_tagihan' =>  $request->noBill,
     		'nominal' =>  $request->isiHrgDb,
-    		'idUser' =>  "3",
+    		'idUser' =>  Auth::user()->uid,
     		'noRek' =>  $request->noRekv,
     		'nmRek' =>  $request->namaRek,
             'noTelp' => $request->isi_Tlp,
-    		'createUser' => "System",
+    		'createUser' => Auth::user()->uid,
     		'confirmYn' => "N",
     	]);    	
 
