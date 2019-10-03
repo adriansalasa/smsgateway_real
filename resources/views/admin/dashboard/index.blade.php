@@ -59,16 +59,29 @@ Dashboard
             </div>
           </a>
         </div> -->
-        <div class="col-md-4 col-lg-4">
-          <a href="{{ route('admin.notification') }}" class="text-decoration-none">
-            <div class="card bg-warning text-white">
-              <div class="card-body ml-2 mr-2 bell-icon">
-                <h4>{{$notif}}</h4>
-                <span>New Notification</span>
-              </div>
+         @if(Auth::user()->uid == '1')
+            <div class="col-md-4 col-lg-4">
+              <a href="{{ route('admin.notification') }}" class="text-decoration-none">
+                <div class="card bg-warning text-white">
+                  <div class="card-body ml-2 mr-2 bell-icon">
+                    <h4>{{$notif}}</h4>
+                    <span>New Notification</span>
+                  </div>
+                </div>
+              </a>
             </div>
-          </a>
-        </div>
+        @else
+            <div class="col-md-4 col-lg-4">
+              <a href="{{ route('admin.phonebook') }}" class="text-decoration-none">
+                <div class="card bg-secondary text-white">
+                  <div class="card-body ml-2 mr-2 pb-icon">
+                    <h4>{{$pb}}</h4>
+                    <span>Phonebook</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+        @endif
         <div class="col-md-4 col-lg-4">
           <a href="{{ route('admin.inbox') }}" class="text-decoration-none">
             <div class="card bg-info">
