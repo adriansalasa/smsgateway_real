@@ -53,5 +53,13 @@
   background-position: right;
 }
 
+.bell-icon {
+ 
+  background-image: url('../img/gmt/bell_ed_S22.png');
+  background-repeat: no-repeat;
+  background-size: 65px;
+  background-position: right;
+}
+
 /*# sourceMappingURL=custom.css.map */
 

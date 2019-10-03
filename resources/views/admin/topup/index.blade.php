@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
- <style>
+ <!-- <style>
       /*green button*/
     /* .button
      {
@@ -30,10 +26,7 @@
      }
      .button3:hover {background-color: rgb(165,42,42);}   */
 
-</style>
-</head>
-<body>
-
+</style> -->
 
 @extends('layouts.admin-master')
 
@@ -42,6 +35,8 @@
 @endsection
 
 @section('content')
+<head><meta http-equiv="refresh" content="10; URL={{ route('admin.topup') }}"></head>
+<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 <section class="section">
   <div class="section-header">
       <div class="col-sm-8">           
@@ -69,7 +64,7 @@
                   </h2><hr>   
 
                   @if (session('status'))
-                      <div class="alert alert-warning">
+                      <div id="disappear" class="alert alert-warning">
                           {{ session('status') }}
                       </div>
                   @endif  
@@ -79,22 +74,22 @@
   					<div class="container">                 
                 <div class="row">       
 
-                    <div class="col-sm-4">
-                    	<div class="card ml-4">
-                      		<div class="card-header bg-info text-white">
-                      			<!-- <h3 class="ml-5" style="text-indent: 12px"> REGULAR</h3>                 -->
+                   <div class="col-sm-4">
+                    	 <div class="card ml-4">
+                      		<div class="card-header bg-info text-white">                      			
                             <h3 > REGULAR</h3>                
                       		</div>
 
                           <form method="POST" action="{{ url('/topup/payment')}}">
                                 @csrf
+
                                 <input type="hidden" name="credUser" id="credUser" value="{{ $user_get->credit}}">
                                 <input type="hidden" name="mobileUser" id="mobileUser" value="{{ $user_get->mobile}}">
+                            	
+                                <div class="card card-body border border-info">      
 
-                            	<!-- 	<button type="submit" style="width: 302px;  height: 340px; color:#3c8dbc; " class="button"  name="btnReg" value="Regular"> -->                                
-                                <div class="card card-body border border-info">
-                                  			<!-- <h3 class="card-title text text-info">250Rb /Month<hr></h3> -->
                                         <h3 class="card-title text text-info">Rp 250.000 /bulan<hr></h3>
+
                                         <input type="hidden" name="P_reg" id="P_reg" value="250000">
                             
                                   			<div class="card-text text-info" style="font-size: 20px; font-variant-caps: titling-case;">
@@ -107,46 +102,50 @@
                                           
                                 			  </div>
 
-                                          <button type="submit" class="btn btn-danger btn-md"  name="btnReg" value="Regular">
-                                              Beli Paket
-                                          </button>
-                            		<!-- </button>                  -->                  
-                              </div>                              
-                            </form>                            
+                                        <button type="submit" class="btn btn-danger btn-md"  name="btnReg" value="Regular">
+                                            Beli Paket
+                                        </button>
+                                </div>
+
+                          </form>                            
   	                   </div>
-  	                 </div>
+  	               </div>
+
 
                     <div class="col-sm-4">
+
                         <div class="card ml-4">
-                          <div class="card-header bg-warning text-white">
-                              <h3 > PREMIUM </h3>
-                          </div>
 
-                          <form method="POST" action="{{ url('/topup/payment')}}">
-                                @csrf
-                                <input type="hidden" name="credUser" id="credUser" value="{{ $user_get->credit}}">
-                                <input type="hidden" name="mobileUser" id="mobileUser" value="{{ $user_get->mobile}}">
+                            <div class="card-header bg-warning text-white">
+                                <h3 > PREMIUM </h3>
+                            </div>
 
-                               <!-- <button type="submit" style="width: 302px; height: 340px; color:white; font-size:25px; " href="http://localhost/smsgateway/topup/payment" class="button2" name="btnPrem" value="Premium"> -->
-                                <div class="card card-body border border-warning">
-                              			<h3 class="card-title text text-warning">Rp 500.000 /bulan<hr></h3>
-                                    <input type="hidden" name="P_prem" id="P_prem" value="500000">
+                            <form method="POST" action="{{ url('/topup/payment')}}">
+                                  @csrf
+                                  <input type="hidden" name="credUser" id="credUser" value="{{ $user_get->credit}}">
+                                  <input type="hidden" name="mobileUser" id="mobileUser" value="{{ $user_get->mobile}}">
+                                 
+                                  <div class="card card-body border border-warning">
+                                			<h3 class="card-title text text-warning">Rp 500.000 /bulan<hr></h3>
+                                      <input type="hidden" name="P_prem" id="P_prem" value="500000">
 
-                              			<div class="card-text text-warning" style="font-size: 20px; font-variant-caps: titling-case;">
-                                        Dashboard akses<br><br>
-                                        1200 SMS<br><br>
-                                        Nomor GSM Acak<br><br>
-                                        SMS semi 2 arah<br><br>
-                                        SMS akses API Client<br><br>
-                            			  </div> 			
-                                    
-                                      <button type="submit" class="btn btn-danger btn-md"  name="btnPrem" value="Premium">
-                                          Beli Paket
-                                      </button>
-                                </div>                                   
-                          		  <!-- </button>                      -->           
-                           </form>
+                                			<div class="card-text text-warning" style="font-size: 20px; font-variant-caps: titling-case;">
+                                          Dashboard akses<br><br>
+                                          1200 SMS<br><br>
+                                          Nomor GSM Acak<br><br>
+                                          SMS semi 2 arah<br><br>
+                                          SMS akses API Client<br><br>
+                              			  </div> 			
+                                      
+                                        <button type="submit" class="btn btn-danger btn-md"  name="btnPrem" value="Premium">
+                                            Beli Paket
+                                        </button>
+                                  </div>                                   
+                            		  
+                             </form>
+
                         </div> 
+
                     </div>
 
                     <div class="col-sm-4">
@@ -183,8 +182,7 @@
                             </form>  
                         </div> 
                     </div>
-
-               </div>                                                
+                </div>                                                
             </div>
           </div>                                   
         </div>    
@@ -193,6 +191,11 @@
   </div>
 </section>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript"> 
+  $(document).ready( function() {
+    $('#disappear').delay(3000).fadeOut();
+  });
+</script>
+
 @endsection
-</body>
-</html>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Inbox;
 use App\Outbox;
 use App\Phonebook;
+use App\buycredit;
 use Auth;
 use Month;
 use Session;
@@ -30,6 +31,7 @@ class DashboardController extends Controller
         $queue=Outbox::where('uid', Auth::user()->uid)->where('p_status', '0')->count();
         $pb=Phonebook::where('uid', Auth::user()->uid)->count();
         $failed=Outbox::where('uid', Auth::user()->uid)->where('p_status', '2')->count();
+        $notif=buycredit::where('confirmYn', 'N')->count();
 
     	$tahun=date('Y');
     	$tgl_inbox = Inbox::selectRaw('year(in_datetime) year, monthname(in_datetime) month, count(*) data')
@@ -62,7 +64,7 @@ class DashboardController extends Controller
         $bo11 = Outbox::whereYear('p_datetime', $tahun)->whereMonth('p_datetime', '11')->where('uid', Auth::user()->uid)->count();
         $bo12 = Outbox::whereYear('p_datetime', $tahun)->whereMonth('p_datetime', '12')->where('uid', Auth::user()->uid)->count();
 
-        return view('admin.dashboard.index', compact('tgl_inbox', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'bo1', 'bo2', 'bo3', 'bo4', 'bo5', 'bo6', 'bo7', 'bo8', 'bo9', 'bo10', 'bo11', 'bo12', 'tahun', 'inbox', 'outbox', 'pb', 'failed', 'queue'));
+        return view('admin.dashboard.index', compact('tgl_inbox', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10', 'b11', 'b12', 'bo1', 'bo2', 'bo3', 'bo4', 'bo5', 'bo6', 'bo7', 'bo8', 'bo9', 'bo10', 'bo11', 'bo12', 'tahun', 'inbox', 'outbox', 'pb', 'failed', 'queue', 'notif'));
 
     }
 

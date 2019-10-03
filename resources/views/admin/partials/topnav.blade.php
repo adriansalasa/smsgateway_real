@@ -1,13 +1,19 @@
 
-     <!--  <audio src="{{url('sound/Bell.mp3')}}"
-            autoplay="autoplay" hidden="true">      
-      </audio> -->      
 <!DOCTYPE html>
 <html>
+
+ @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitems)
+
+ @if(Auth::user()->uid == '1')
+    @if ($JmlNotifitems->cntNotif > 0 ) 
+        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head> -->
+        <head><meta http-equiv="refresh" content="10"></head>
+    @endif
+ @endif
+ @endforeach
+
 <body>     
-    <!--   <iframe src="https://s3.amazonaws.com/Syntaxxx/bigger-picture.mp3" allow="autoplay" 
-      style="display:none" id="iframeAudio">
-      </iframe>  -->
+
 <form class="form-inline mr-auto" action="{{ route('admin.users') }}">
 
   <ul class="navbar-nav mr-3">
@@ -46,13 +52,13 @@
       <label class="ml-2">{{ $JmlNotifitems->cntNotif}} New Notification</label>
       </a>         
 
-      <!-- <audio controls>
-        <source src="Bell.mp3">          
-      </audio> -->     
-
-       <iframe src="{{url('sound/Bell.mp3')}}" allow="autoplay" 
-      style="display:none" id="iframeAudio">
-      </iframe>       
+      <!-- <iframe src="{{url('sound/Bell.mp3')}}" allow="autoplay"
+          style="display:none" id="iframeAudio">
+      </iframe>           -->
+ 
+      <audio id="iframeAudio" autoplay loop>
+          <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
+      </audio>         
           
       @else   
       <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">

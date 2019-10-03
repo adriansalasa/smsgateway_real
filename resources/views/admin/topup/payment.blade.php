@@ -1,3 +1,10 @@
+@extends('layouts.admin-master')
+
+@section('title')
+'Payment'
+@endsection
+
+@section('content')
 <script type="text/javascript">
 
   //function ValidateForm(form){
@@ -26,13 +33,6 @@ function getRadioVal(){
 
 </script>
 
-@extends('layouts.admin-master')
-
-@section('title')
-'Payment'
-@endsection
-
-@section('content')
 <section class="section">
   <div class="section-header">
     <h1>Payment</h1>    
