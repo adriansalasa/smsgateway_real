@@ -11,6 +11,12 @@ Dashboard
 
 
 @section('content')
+
+ @if(Auth::user()->uid == '1')    
+        <head><meta http-equiv="refresh" content="10; URL={{ route('admin.dashboard') }}"></head>
+        <!-- <head><meta http-equiv="refresh" content="10"></head> -->    
+ @endif
+
 <style type="text/css">
 	#container {
 		min-width: 310px;

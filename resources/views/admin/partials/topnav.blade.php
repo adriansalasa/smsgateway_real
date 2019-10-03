@@ -2,15 +2,12 @@
 <!DOCTYPE html>
 <html>
 
- @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitems)
+ <!-- @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitems)
 
- @if(Auth::user()->uid == '1')
-    @if ($JmlNotifitems->cntNotif > 0 ) 
-        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head> -->
-        <head><meta http-equiv="refresh" content="10"></head>
-    @endif
+ @if(Auth::user()->uid == '1')    
+        <head><meta http-equiv="refresh" content="10; URL={{ route('admin.dashboard') }}"></head>    
  @endif
- @endforeach
+ @endforeach -->
 
 <body>     
 

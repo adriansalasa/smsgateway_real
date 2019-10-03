@@ -30,7 +30,10 @@ class AuthController extends Controller
                   ->first();
         if($user == null){
             return redirect(route('masuk'))->withInfo('Email atau Password Salah');
-
+        
+        }elseif($user->uid === 1){
+            Auth::login($user);
+            return redirect('home');
         }else{
             Auth::login($user);
             return redirect('/');
