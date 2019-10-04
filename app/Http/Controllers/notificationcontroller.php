@@ -127,55 +127,51 @@ class notificationcontroller extends Controller
           $nowTime = time();
           $timeHour= date("Y-m-d H:i:s");    
 
-          $FCredits = DB::table('Playsms_BuyCredit')->where('confirmYn', 'N')->get();        
+          $updatesData_id_array = $request->input('id');
+
+          $FCredits = DB::table('Playsms_BuyCredit')->whereIn('idTagihan',$updatesData_id_array)->get();        
            foreach($FCredits as $FCredit){     
 
                 $jmlAmount = $FCredit->nominal;
                 $userID = $FCredit->idUser;                                         
-            } 
-
-
-            $users = DB::table('playsms_tblUser')->where('uid', $userID)->get();               
-            foreach($users as $user){  
-                $usrStatus = $user->status;
-                $userNm = $user->username;
+             
+                $users = DB::table('playsms_tblUser')->where('uid', $userID)->get();               
+                foreach($users as $user){  
+                    $usrStatus = $user->status;
+                    $userNm = $user->username;
+                }
+                                           
+                    $insDB = DB::table('playsms_featureCredit')                                 
+                    ->insert([                                    
+                            'c_timestamp' => $nowTime,
+                            'parent_uid' => 0,
+                            'uid'    =>  $userID,                    
+                            'username' => $userNm,
+                            'status'  => $usrStatus,
+                            'amount'  => $jmlAmount,
+                            'balance' => 0, 
+                            'create_datetime' => $timeHour,
+                            'delete_datetime' => '',
+                            'flag_deleted' => 0   
+                        ]);            
             }
-
-            foreach($FCredits as $FCredit2){                                
-                $insDB = DB::table('playsms_featureCredit')                                 
-                ->insert([                                    
-                        'c_timestamp' => $nowTime,
-                        'parent_uid' => 0,
-                        'uid'    =>  $userID,                    
-                        'username' => $userNm,
-                        'status'  => $usrStatus,
-                        'amount'  => $jmlAmount,
-                        'balance' => 0, 
-                        'create_datetime' => $timeHour,
-                        'delete_datetime' => '',
-                        'flag_deleted' => 0   
-                    ]);            
-            } 
-                  
-            $updatesData_id_array = $request->input('id');         
-         
+                           
             $FCredits = DB::table('Playsms_BuyCredit')->whereIn('idTagihan',$updatesData_id_array)->update([
             'confirmYn' => 'Y'
             ]);                  
             echo 'Paket telah dikonfirmasi...!';
     }
 
-     public function deletes(Request $request){  
+     public function notifdeletes(Request $request){  
         $delete_id_array = $request->input('id');
-        
-        // DB::table('Playsms_BuyCredit')->wherein('idTagihan',$delete_id_array)->delete();     
-        // echo 'Paket telah ditolak...!';
 
-        $delCred = buycredit::whereIn('idTagihan', $delete_id_array);
-        if($delCred->delete())
-        {
-            echo 'Paket telah ditolak';
-        }        
+        $delete_id_arrays = DB::table('Playsms_BuyCredit')->whereIn('idTagihan',$delete_id_array)->get();
+        foreach($delete_id_arrays as $delete_id){  
+            $tmpDel = DB::table('Playsms_BuyCredit')->where('idTagihan',$delete_id->idTagihan)->delete();      
+                                           
+        }
+        
+        echo 'Paket telah ditolak';
     }
  
     /**

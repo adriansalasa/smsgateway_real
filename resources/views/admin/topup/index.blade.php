@@ -35,22 +35,21 @@
 @endsection
 
 @section('content')
-<head><meta http-equiv="refresh" content="10; URL={{ route('admin.topup') }}"></head>
+<!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.topup') }}"></head> -->
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 <section class="section">
   <div class="section-header">
       <div class="col-sm-8">           
-          <h1>Top UP Kredit</h1><img class="img-fluid ml-3" src="{{ asset('assets/img/money/money.svg') }}" alt="logo" width="40" height="30">	        
+          <h1>Top UP Kredit</h1><!-- <img class="img-fluid ml-3" src="{{ asset('assets/img/money/money.svg') }}" alt="logo" width="40" height="30"> -->	        
       </div>
     
-      <div class="ml-3 col-sm-4">
-          <h1 class="text text-success">Saldo Kredit Anda :
-              <label for="saldo" >
-                {{number_format($user_get->credit,2,",",".") }}                
-                <!-- {{ $user_get->credit }}-->                
+      <div class="ml-5 col-sm-4 mt-1" >
+          <h1 class="text text-success sCredit" id="divSaldo">Saldo Kredit Anda :
+              <label for="saldo" class="" >
+                {{number_format($user_get->credit,2,",",".") }}                                
               </label>
           </h1>
-      </div>
+      </div>     
 
   </div>     
    
@@ -192,10 +191,30 @@
 </section>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 <script type="text/javascript"> 
+
+  //Hilangkan tampilan message with status dlm 2 detik
   $(document).ready( function() {
     $('#disappear').delay(2000).fadeOut();
   });
+
+  //Refresh jumlah saldo yang tersisa dlm 5 detik
+  var auto_refresh = setInterval(
+  function ()
+  {
+  $('.sCredit').load(location.href + " #divSaldo").fadeIn("slow");
+  }, 5000); // refresh every 15000 milliseconds
+
+//   var auto_refresh = setInterval(function () {
+//     $('.sCredit').fadeIn('slow', function() {
+//         $(this).load(location.href + " #divSaldo", function() {
+//             $(this).fadeIn('slow');
+//         });
+//     });
+// }, 5000); // refresh every 15000 milliseconds
+
 </script>
+
 
 @endsection

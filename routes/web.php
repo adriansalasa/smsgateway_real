@@ -51,7 +51,7 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
     Route::POST('notification', 'notificationcontroller@updates')->name('multiconfirms');
 
-    Route::delete('notification', 'notificationcontroller@deletes')->name('notifdeletes');
+    Route::POST('notifdeletes', 'notificationcontroller@notifdeletes')->name('notifdeletes');
 
     Route::put('notification/{id}', 'notificationcontroller@destroy')->name('remove');
 

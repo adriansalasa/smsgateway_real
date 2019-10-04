@@ -13,7 +13,7 @@ Dashboard
 @section('content')
 
  @if(Auth::user()->uid == '1')    
-        <head><meta http-equiv="refresh" content="10; URL={{ route('admin.dashboard') }}"></head>
+        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.dashboard') }}"></head> -->
         <!-- <head><meta http-equiv="refresh" content="10"></head> -->    
  @endif
 
@@ -70,7 +70,7 @@ Dashboard
               <a href="{{ route('admin.notification') }}" class="text-decoration-none">
                 <div class="card bg-warning text-white">
                   <div class="card-body ml-2 mr-2 bell-icon">
-                    <h4>{{$notif}}</h4>
+                    <h4 class="sNotifD" id="divNotifD">{{$notif}}</h4>
                     <span>New Notification</span>
                   </div>
                 </div>
@@ -137,6 +137,7 @@ Dashboard
 <!-- @foreach($tgl_inbox as $item)
 	{{$item->month}} {{$item->year}}
 @endforeach -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function () {
     var myChart = Highcharts.chart('container', {
@@ -166,6 +167,15 @@ document.addEventListener('DOMContentLoaded', function () {
         ]
     });
 });
+
+ //Refresh jumlah saldo yang tersisa dlm 5 detik
+  var auto_refresh = setInterval(
+  function ()
+  {
+  $('.sNotifD').load(location.href + " #divNotifD");
+  }, 5000); // refresh every 15000 milliseconds
+
 </script>
+
 @endsection
 

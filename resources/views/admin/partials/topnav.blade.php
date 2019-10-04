@@ -17,9 +17,10 @@
 
     <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
 
-    <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
-
+    <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>    
+  
   </ul>
+
 
   <div class="search-element">
 
@@ -29,15 +30,26 @@
 
     <div class="search-backdrop"></div>
 
-    {{-- @include('admin.partials.searchhistory') --}}
+    {{-- @include('admin.partials.searchhistory') --}}     
+
 
   </div>
-
+ 
 </form>
+
 
 <ul class="navbar-nav navbar-right">
 
   @if(Auth::user()->uid == '1')
+
+  <div class="ml-5 sNotif" id="divNotif">    
+      <a href="#" class="badge badge-pill badge-danger badge-xs text-white">
+          {{ $JmlNotifitems->cntNotif}}
+      </a>    
+
+    <!--   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span> <span class="far fa-bell" style="font-size:18px;">{{ $JmlNotifitems->cntNotif}}</span></a> -->
+  </div>
+
  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
    <li class="dropdown dropdown-list-toggle">    
 
@@ -45,21 +57,21 @@
           
       @if ($JmlNotifitems->cntNotif > 0 )     
       <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-      <i class="fa fa-bell text-warning"></i>
-      <label class="ml-2">{{ $JmlNotifitems->cntNotif}} New Notification</label>
+      <i class="far fa-bell"></i>
+      <!-- <label class="ml-2">{{ $JmlNotifitems->cntNotif}} New Notification</label> -->
       </a>         
 
       <!-- <iframe src="{{url('sound/Bell.mp3')}}" allow="autoplay"
           style="display:none" id="iframeAudio">
       </iframe>           -->
  
-      <audio id="iframeAudio" autoplay loop>
+    <!--   <audio id="iframeAudio" autoplay loop>
           <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
-      </audio>         
+      </audio>    -->      
           
       @else   
       <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-      <i class="fa fa-bell"></i>
+      <i class="far fa-bell"></i>
       </a>
       @endif
       @endforeach
@@ -195,5 +207,17 @@
   </li>
 
 </ul>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+<script type="text/javascript"> 
+
+ //Refresh jumlah saldo yang tersisa dlm 5 detik
+  var auto_refresh = setInterval(
+  function ()
+  {
+  $('.sNotif').load(location.href + " #divNotif");
+  }, 5000); // refresh every 15000 milliseconds
+
+</script>
 </body>
 </html>

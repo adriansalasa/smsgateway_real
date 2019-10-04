@@ -13,7 +13,7 @@
 @section('content')
 
  @if(Auth::user()->uid == '1')    
-        <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head>        
+        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head> -->        
  @endif
 
 <section class="section">
@@ -314,12 +314,13 @@
                   },
 
                 url:"{{ route('admin.notifdeletes') }}",
+                // url:"{{ '/admin/notifdeletes' }}",
 
-                method:'delete',
+                method:'POST',
 
                 data:{id:list_id, _token:csrf},                
 
-                success:function(data)
+                success:function(data) 
 
                 {
                    
