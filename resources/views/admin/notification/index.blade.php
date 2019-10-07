@@ -13,7 +13,7 @@
 @section('content')
 
  @if(Auth::user()->uid == '1')   
-        {{$notifN_old = $notifN }}
+        
         <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head> -->
         @if(url()->current() === url('notification') ) 
             
@@ -21,17 +21,9 @@
             @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitem)                                           
             @endforeach         
              
-             {{$aku = $JmlNotifitem->cntNotif}}
-             
-          </a>
-          <!-- {{ $notifN_old}} -->
-         <!--  @if($aku === $notifN_old )
-          besar
-          @else
-          gak
-          @endif -->
-
-         <!--  {{ $notifN}} -->
+             <!-- {{$aku = $JmlNotifitem->cntNotif}}                      -->
+        </a>
+        
          <!-- <head><meta http-equiv="refresh" content="15; URL={{ route('admin.notification') }}"></head> -->
 
         @endif
