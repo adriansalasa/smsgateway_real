@@ -26,14 +26,16 @@
 
     <input class="form-control" value="{{ Request::get('query') }}" name="query" type="search" placeholder="Search" aria-label="Search" data-width="250">
 
-    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+    <button class="btn" type="submit"><i class="fas fa-search"></i></button>    
 
     <div class="search-backdrop"></div>
 
-    {{-- @include('admin.partials.searchhistory') --}}     
-
+    {{-- @include('admin.partials.searchhistory') --}}  
 
   </div>
+
+
+  </ul>
  
 </form>
 
@@ -41,82 +43,84 @@
 <ul class="navbar-nav navbar-right">
 
   @if(Auth::user()->uid == '1')
-
-  <div class="ml-5 sNotif" id="divNotif">    
-      <a href="#" class="badge badge-pill badge-danger badge-xs text-white">
-          {{ $JmlNotifitems->cntNotif}}
-      </a>    
-
-    <!--   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span> <span class="far fa-bell" style="font-size:18px;">{{ $JmlNotifitems->cntNotif}}</span></a> -->
-  </div>
-
- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-   <li class="dropdown dropdown-list-toggle">    
-
-     @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitems)
-          
-      @if ($JmlNotifitems->cntNotif > 0 )     
-      <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-      <i class="far fa-bell"></i>
-      <!-- <label class="ml-2">{{ $JmlNotifitems->cntNotif}} New Notification</label> -->
-      </a>         
-
-      <!-- <iframe src="{{url('sound/Bell.mp3')}}" allow="autoplay"
-          style="display:none" id="iframeAudio">
-      </iframe>           -->
  
-    <!--   <audio id="iframeAudio" autoplay loop>
-          <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
-      </audio>    -->      
-          
-      @else   
-      <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-      <i class="far fa-bell"></i>
-      </a>
-      @endif
-      @endforeach
+   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    
+     <li class="dropdown dropdown-list-toggle sNotif" id="divNotif">         
 
-      <div class="dropdown-menu dropdown-list dropdown-menu-right">
+       @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitems)
+            
+        @if ($JmlNotifitems->cntNotif > 0 )     
+        
+          <a href="{{url('notification')}}" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
+              <i class="far fa-bell"></i>       
+              <span class="badge badge-warning align-top">{{ $JmlNotifitems->cntNotif}}</span> 
+          </a>       
 
-        <div class="dropdown-header">Notification</div>  
+           <!-- <iframe src="{{url('sound/Bell.mp3')}}" allow="autoplay"
+            style="display:none" id="iframeAudio">
+        </iframe>           -->                 
 
-          <div class="dropdown-list-content dropdown-list-icons">             
+           @if(url()->current() === url('dashboard') )
+           <audio id="iframeAudio" autoplay loop>
+                  <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
+              </audio>
+           @elseif(url()->current() === url('notification') )
+              <audio id="iframeAudio" autoplay loop>
+                  <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
+              </audio>               
 
-              @foreach(App\buycredit::SELECT('idTagihan', 'username', 'noTelp', 'nominal',
-              DB::raw("CONCAT('Request pengisian paket',' ', Playsms_BuyCredit.nominal) AS detailMessages"), 
-              'createDt')->JOIN('playsms_tblUser', 'idUser', '=', 'uid')->where('confirmYn', 'N')->orderBy('createDt', 'DESC')->get() as $Notifitems)
+           @endif
+    
+                 
+        @else   
+        <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
+        <i class="far fa-bell"></i>
+        </a>
+        @endif
+        @endforeach
 
-              <!-- <a href="{{url('notification/view/'.$Notifitems->idTagihan)}}" class="dropdown-item  -->
-                <a href="{{url('notification')}}" class="dropdown-item dropdown-item-unread">
+        <div class="dropdown-menu dropdown-list dropdown-menu-right">
 
-                <div class="dropdown-item-icon bg-danger text-white">
+          <div class="dropdown-header">Notification</div>  
 
-                  <i class="fas fa-user"></i>                  
+            <div class="dropdown-list-content dropdown-list-icons">             
 
-                </div>
+                @foreach(App\buycredit::SELECT('idTagihan', 'username', 'noTelp', 'nominal',
+                DB::raw("CONCAT('Request pengisian paket',' ', Playsms_BuyCredit.nominal) AS detailMessages"), 
+                'createDt')->JOIN('playsms_tblUser', 'idUser', '=', 'uid')->where('confirmYn', 'N')->orderBy('createDt', 'DESC')->get() as $Notifitems)
 
-                <div class="dropdown-item-desc">
-                  
-                  {{ substr($Notifitems->detailMessages, 0,35) }}
+                
+                  <a href="{{url('notification')}}" class="dropdown-item dropdown-item-unread">
 
-                  <div class="time text-primary">{{$Notifitems->createDt}}</div>
+                  <div class="dropdown-item-icon bg-danger text-white">
 
-                </div>
+                    <i class="fas fa-user"></i>                  
 
-              </a>
-              @endforeach
-              
-              
-          </div>
+                  </div>
 
-      </div>
+                  <div class="dropdown-item-desc">
+                    
+                    {{ substr($Notifitems->detailMessages, 0,35) }}
 
-  </li>
-  @endif
+                    <div class="time text-primary">{{$Notifitems->createDt}}</div>
+
+                  </div>
+
+                </a>
+                @endforeach
+                                
+            </div>
+
+        </div>
+
+      </li>
+
+    @endif
 
   <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg{{ Auth::user()->unreadNotifications->count() ? ' beep' : '' }}"><!-- <i class="far fa-bell"></i> -->
 
-     @if(Auth::user()->uid == '1')
+     @if(Auth::user()->uid == '1')     
 
      <i class="fa fa-envelope"></i>
 
@@ -219,5 +223,6 @@
   }, 5000); // refresh every 15000 milliseconds
 
 </script>
+
 </body>
 </html>

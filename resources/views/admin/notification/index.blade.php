@@ -12,9 +12,30 @@
 
 @section('content')
 
- @if(Auth::user()->uid == '1')    
-        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head> -->        
- @endif
+ @if(Auth::user()->uid == '1')   
+        {{$notifN_old = $notifN }}
+        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head> -->
+        @if(url()->current() === url('notification') ) 
+            
+        <a href="#" class="dropdown dropdown-list-toggle sNotifD" id="divNotifD">                   
+            @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitem)                                           
+            @endforeach         
+             
+             {{$aku = $JmlNotifitem->cntNotif}}
+             
+          </a>
+          <!-- {{ $notifN_old}} -->
+         <!--  @if($aku === $notifN_old )
+          besar
+          @else
+          gak
+          @endif -->
+
+         <!--  {{ $notifN}} -->
+         <!-- <head><meta http-equiv="refresh" content="15; URL={{ route('admin.notification') }}"></head> -->
+
+        @endif
+ @endif   
 
 <section class="section">
 
@@ -26,7 +47,7 @@
         <div id="disappear" class="alert alert-success ml-5 mt-2">
           {{ session('status') }}
         </div>
-    @endif   
+    @endif       
 
   </div>
 
@@ -128,14 +149,15 @@
 
                     </tr>
 
-                    @foreach ($notifdb as $notif)
-
+                    @foreach ($notifdb as $notif)                    
                     <tr>
 
                       <td class="p-0 text-center">
 
                         <div class="custom-checkbox custom-control">
 
+                          <input type="hidden" value='{{ $notif->idTagihan }}'>
+                          
                           {{-- <input type="checkbox" data-checkboxes="mygroup" class="data-check custom-control-input" name='uid[]' value='{{$notif->idTagihan}}' id="checkbox-1"> --}}
 
                           <input type="checkbox" data-checkboxes="mygroup" class="data-check custom-control-input" id="checkbox-{{ $loop->iteration }}" value='{{$notif->idTagihan}}'>
@@ -147,8 +169,8 @@
                         </div>
 
                       </td>
-
-                      <td>{{$notif->noTelp}}</td> 
+                      
+                      <td> {{$notif->noTelp}} </td> 
                       <input type="hidden" name="noTelp" value="{{$notif->noTelp}}">                     
 
                       <td class="align-middle">
@@ -180,8 +202,8 @@
                             <button type="submit" class="btn btn-link text-danger" title="Reject" onclick="return confirm('Apakah Anda yakin akan Reject paket ini...?')"><i class="fa fa-ban fa-2x"></i></button>
                           </form>                        
                        </td>                                                                  
-
-                    </tr>
+                     
+                    </tr>                  
                     @endforeach
 
                   </table>
@@ -460,10 +482,20 @@
            
 </script>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"> 
   $(document).ready( function() {
     $('#disappear').delay(3000).fadeOut();
   });
+
+  //Refresh jumlah saldo yang tersisa dlm 5 detik
+  var auto_refresh = setInterval(
+  function ()
+  {
+  $('.sNotifD').load(location.href + " #divNotifD");
+  }, 5000); // refresh every 15000 milliseconds
 </script>
-@endsection        
+ 
+
+@endsection         
