@@ -9,24 +9,11 @@
 @endsection
 
 
-
 @section('content')
 
- @if(Auth::user()->uid == '1')   
+@if(Auth::user()->uid == '1')   
         
-        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.notification') }}"></head> -->
-        @if(url()->current() === url('notification') ) 
-            
-        <a href="#" class="dropdown dropdown-list-toggle sNotifD" id="divNotifD">                   
-            @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitem)                                           
-            @endforeach         
-             
-             <!-- {{$aku = $JmlNotifitem->cntNotif}}                      -->
-        </a>
-        
-         <!-- <head><meta http-equiv="refresh" content="15; URL={{ route('admin.notification') }}"></head> -->
-
-        @endif
+     <head><meta http-equiv="refresh" content="12; URL={{ route('admin.notification') }}"></head>
  @endif   
 
 <section class="section">
@@ -34,7 +21,7 @@
   <div class="section-header">
 
     <h1>Notification</h1>  
-
+      
     @if (session('status'))
         <div id="disappear" class="alert alert-success ml-5 mt-2">
           {{ session('status') }}
@@ -46,7 +33,7 @@
   <div class="section-body">
 
     <div class="row">
-
+   
       <div class="col-12 col-md-12 col-lg-12">
 
           <div class="progress"></div>
@@ -243,8 +230,7 @@
 
       // Fungsi Check all checkbox 
 
-        $("#checkbox-all").click(function(){
-
+        $("#checkbox-all").click(function(){            
             $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
 
         });
@@ -485,8 +471,9 @@
   var auto_refresh = setInterval(
   function ()
   {
-  $('.sNotifD').load(location.href + " #divNotifD");
+    $('.sNotifD').load(location.href + " #divNotifD");
   }, 5000); // refresh every 15000 milliseconds
+
 </script>
  
 
