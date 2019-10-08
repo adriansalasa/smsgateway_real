@@ -61,7 +61,7 @@
             style="display:none" id="iframeAudio">
         </iframe>           -->                 
 
-           @if(url()->current() === url('dashboard') )
+       <!--     @if(url()->current() === url('dashboard') )
            <audio id="iframeAudio" autoplay loop>
                   <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
               </audio>
@@ -70,7 +70,11 @@
                   <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
               </audio>               
 
-           @endif
+           @endif -->
+
+        <audio id="iframeAudio" autoplay>
+            <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
+        </audio>
     
                  
         @else   

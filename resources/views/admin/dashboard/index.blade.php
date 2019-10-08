@@ -10,12 +10,7 @@ Dashboard
 
 
 
-@section('content')
-
- @if(Auth::user()->uid == '1')    
-        <!-- <head><meta http-equiv="refresh" content="10; URL={{ route('admin.dashboard') }}"></head> -->
-        <!-- <head><meta http-equiv="refresh" content="10"></head> -->    
- @endif
+@section('content') 
 
 <style type="text/css">
 	#container {
@@ -137,7 +132,7 @@ Dashboard
 <!-- @foreach($tgl_inbox as $item)
 	{{$item->month}} {{$item->year}}
 @endforeach -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function () {
     var myChart = Highcharts.chart('container', {

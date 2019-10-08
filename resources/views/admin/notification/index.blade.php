@@ -14,10 +14,10 @@
 @if(Auth::user()->uid == '1')   
         
      <head><meta http-equiv="refresh" content="12; URL={{ route('admin.notification') }}"></head>
- @endif   
+ @endif    
 
 <section class="section">
-
+ 
   <div class="section-header">
 
     <h1>Notification</h1>  
@@ -460,8 +460,8 @@
            
 </script>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"> 
   $(document).ready( function() {
     $('#disappear').delay(3000).fadeOut();
