@@ -122,7 +122,7 @@ class notificationcontroller extends Controller
         'confirmYn' => 'Y'
         ]);                                
 
-        return redirect(route('admin.notification'))->with('status', 'Paket telah dikonfirmasi...!');
+        return redirect(route('admin.notification'))->with('success', 'Pengisian Paket Berhasil');
     }
 
      public function updates(Request $request)
@@ -187,6 +187,6 @@ class notificationcontroller extends Controller
     {
         // return 'hapus ya';
         DB::table('Playsms_BuyCredit')->where('idTagihan',$id)->delete();     
-        return redirect(route('admin.notification'))->with('status', 'Paket telah direject...!');
+        return redirect(route('admin.notification'))->with('reject', 'Pengisian paket ditolak...!');
     }
 }

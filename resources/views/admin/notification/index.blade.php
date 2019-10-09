@@ -13,7 +13,7 @@
 
 @if(Auth::user()->uid == '1')   
         
-     <head><meta http-equiv="refresh" content="12; URL={{ route('admin.notification') }}"></head>
+     <!-- <head><meta http-equiv="refresh" content="12; URL={{ route('admin.notification') }}"></head> -->
  @endif    
 
 <section class="section">
@@ -21,14 +21,22 @@
   <div class="section-header">
 
     <h1>Notification</h1>  
-      
-    @if (session('status'))
-        <div id="disappear" class="alert alert-success ml-5 mt-2">
-          {{ session('status') }}
-        </div>
-    @endif       
-
+             
   </div>
+
+  @if (session('success'))
+        <div id="disappear" class="alert alert-success alert-dismissible mt-2">
+          <button type="button" class="close">&times;</button>
+          <strong>Selamat...! </strong>{{ session('success') }}
+        </div>
+    @endif   
+
+     @if (session('reject'))
+        <div id="disappear" class="alert alert-danger alert-dismissible mt-2">
+          <button type="button" class="close">&times;</button>
+          <strong>Maaf...! </strong> {{ session('reject') }}
+        </div>
+    @endif 
 
   <div class="section-body">
 
@@ -200,6 +208,7 @@
 
 
 @section('scripts')  
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 
         //Ketika Enter 
@@ -324,7 +333,9 @@
 
                 {
                    
-                  alert(data);                   
+                  // alert(data);               
+                  // swal(data);
+                  swal ( "Oops" ,(data),  "error" );
                   window.location = "{{ route('admin.notification') }}";                  
 
                 }
@@ -434,7 +445,11 @@
 
                 {                  
 
-                  alert(data);
+                  // swal(data);
+                  swal({
+                  title: "Paket Confirm",
+                  text: (data),
+                  icon: "success" });
                   window.location = "{{ route('admin.notification') }}";
 
                 }

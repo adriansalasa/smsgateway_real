@@ -37,10 +37,11 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
 <section class="section">
   <div class="section-header">
       <div class="col-sm-8">           
-          <h1>Top UP Kredit</h1><!-- <img class="img-fluid ml-3" src="{{ asset('assets/img/money/money.svg') }}" alt="logo" width="40" height="30"> -->	        
+          <h1>Top UP Kredit</h1><!-- <img class="img-fluid ml-3" src="{{ asset('assets/img/money/money.svg') }}" alt="logo" width="40" height="30"> -->	                  
       </div>
     
       <div class="ml-3 col-sm-4 mt-1" >
@@ -51,7 +52,14 @@
           </h1>
       </div>     
 
-  </div>     
+  </div>   
+
+  @if (session('status'))
+      <div id="disappear" class="alert alert-success alert-dismissible">
+        <button type="button" class="close">&times;</button>
+         <strong>Harap Menunggu...!</strong> {{ session('status') }}
+      </div>
+  @endif    
    
   <div class="section-body">
     <div class="row">
@@ -60,13 +68,7 @@
         		<div class="card">
         		  <div class="mt-2">
   						    <h2 align="center" class="text-info" style="font-family: verdana"><b>PAKET SESUAI KEBUTUHAN ANDA</b>                          
-                  </h2><hr>   
-
-                  @if (session('status'))
-                      <div id="disappear" class="alert alert-warning">
-                          {{ session('status') }}
-                      </div>
-                  @endif  
+                  </h2><hr>                 
   					  </div>
   					<br>
 
@@ -189,6 +191,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript"> 
 
   //Hilangkan tampilan message with status dlm 2 detik
@@ -210,6 +213,12 @@
 //         });
 //     });
 // }, 5000); // refresh every 15000 milliseconds
+
+
+ // function testalert()
+ // {
+ //  swal("Hello world!")
+ // }
 
 </script>
 

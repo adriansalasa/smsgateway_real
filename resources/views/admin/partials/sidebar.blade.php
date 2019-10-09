@@ -26,11 +26,11 @@
 
       @endif
 
-      @if(Auth::user()->uid != '1')
+     <!--  @if(Auth::user()->uid != '1') -->
 
        <li class="{{ Request::route()->getName() == 'admin.topup' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.topup') }}"><i class="fa fa-wallet"></i><span>TopUP</span></a></li>
 
-      @endif
+<!--       @endif -->
 
        @if(Auth::user()->uid == '1')
 

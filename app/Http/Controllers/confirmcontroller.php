@@ -59,7 +59,7 @@ class confirmcontroller extends Controller
     	// 	'flag_deleted' => 0
     	// ]);  
     	
-    	return redirect('/topup')->with('status', 'Selamat...Pembelian paket menunggu konfirmasi admin!');    	 
+    	return redirect('/topup')->with('status', 'Pembelian paket segera dikonfirmasi admin!');    	 
     }
 
     public function update(Request $request, user_get $user_get)
