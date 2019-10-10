@@ -86,7 +86,7 @@
 
         <div class="dropdown-menu dropdown-list dropdown-menu-right">
 
-          <div class="dropdown-header">Notification</div>  
+          <div class="dropdown-header">Request</div>  
 
             <div class="dropdown-list-content dropdown-list-icons">             
 

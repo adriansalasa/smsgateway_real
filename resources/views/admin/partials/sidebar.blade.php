@@ -30,25 +30,11 @@
 
        <li class="{{ Request::route()->getName() == 'admin.topup' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.topup') }}"><i class="fa fa-wallet"></i><span>TopUP</span></a></li>
 
-<!--       @endif -->
+<!--       @endif --> 
 
        @if(Auth::user()->uid == '1')
 
-       <!-- <li class="{{ Request::route()->getName() == 'admin.notification' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.notification') }}"><i class="fa fa-bell"></i><span>Notification</span></a></li> -->       
-
-      <li class="dropdown {{ Request::route()->getName() == 'admin.notification' || Request::route()->getName() == 'admin.notification'? ' active' : '' }}">
-        
-        <a href="#" class="nav-link has-dropdown"><i class="fa fa-bell"></i> <span>Notification</span></a>
-
-        <ul class="dropdown-menu" >
-
-          <li class=" {{ Request::route()->getName() == 'admin.notification' ? ' active' : '' }}"><a class="nav-link" href="{{ route('admin.notification') }}">Request</a></li>  
-
-          <li class=" {{ Request::route()->getName() == 'admin.confPackage' ? ' active' : '' }}"><a class="nav-link" href="{{ route('admin.confPackage') }}">Confirmation</a></li>            
-
-        </ul>
-
-      </li>
+       <li class="{{ Request::route()->getName() == 'admin.notification' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.notification') }}"><i class="fa fa-bell"></i><span>Notification</span></a></li>             
 
        @endif
 

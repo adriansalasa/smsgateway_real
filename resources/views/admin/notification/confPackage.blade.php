@@ -29,6 +29,7 @@
           <div class="card">
             <div class="card-header">
                 <h4 align="left" class="text-info" style="font-family: verdana"><b>Transaction Form</b></h4>
+              <!--   <img class="img-fluid ml-3" src="{{ asset('assets/img/money/money_ico.png') }}" alt="logo" width="80" height="50"> -->
                 <hr>
              </div>
 
@@ -54,7 +55,7 @@
                   <div class="form-group row">
                       <label for="rek_No" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rek_No" id="rek_No" class="form-control">
+                          <input type="number" name="rek_No" id="rek_No" class="form-control">
                       </div>                     
                   </div>
 

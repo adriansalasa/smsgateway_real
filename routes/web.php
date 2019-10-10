@@ -43,9 +43,7 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
     Route::get('users', 'UserController@index')->name('users');
 
-    Route::get('notification', 'notificationcontroller@index')->name('notification');    
-
-    Route::get('notification/confPackage', 'Con_Pack_controller@index')->name('confPackage'); 
+    Route::get('notification', 'notificationcontroller@index')->name('notification');        
 
     Route::get('notification/view/{id}', 'notificationcontroller@show');    
 
