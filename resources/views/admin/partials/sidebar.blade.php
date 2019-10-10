@@ -26,17 +26,21 @@
 
       @endif
 
-     <!--  @if(Auth::user()->uid != '1') -->
 
-       <li class="{{ Request::route()->getName() == 'admin.topup' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.topup') }}"><i class="fa fa-wallet"></i><span>TopUP</span></a></li>
+      @if(Auth::user()->uid != '1')
 
-<!--       @endif --> 
+      <li class="{{ Request::route()->getName() == 'admin.topup' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.topup') }}"><i class="fa fa-wallet"></i><span>TopUP</span></a></li>
 
-       @if(Auth::user()->uid == '1')
+      <li class="{{ Request::route()->getName() == 'admin.pay_verify' ? ' active' : '' }}"><a class="nav-link" href="{{ route('admin.pay_verify') }}"><i class="fa fa-credit-card"></i> <span>Pay Verify</span></a></li>
 
-       <li class="{{ Request::route()->getName() == 'admin.notification' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.notification') }}"><i class="fa fa-bell"></i><span>Notification</span></a></li>             
+      @endif
 
-       @endif
+ 
+      @if(Auth::user()->uid == '1')
+
+      <li class="{{ Request::route()->getName() == 'admin.notification' ? ' active': '' }}"><a class="nav-link" href="{{ route('admin.notification') }}"><i class="fa fa-bell"></i><span>Notification</span></a></li>             
+
+      @endif   
 
       <li class="dropdown {{ Request::route()->getName() == 'admin.phonebook' || Request::route()->getName() == 'admin.import'? ' active' : '' }}">
 

@@ -39,6 +39,8 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
     Route::POST('topup/confirm', 'confirmcontroller@index');
 
+    Route::get('pay_verify', 'pay_verify_controller@index')->name('pay_verify');
+
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
     Route::get('users', 'UserController@index')->name('users');
@@ -131,7 +133,7 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
 
 
-        Route::get('/inbox', 'InboxsController@index')->name('inbox');
+        Route::get('/inbox', 'InboxsController@index')->name('inbox');        
 
         Route::delete('/inbox/{inbox}', 'InboxsController@destroy')->name('destroy_inbox');
 
@@ -140,6 +142,8 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
         Route::get('/inbox/view/{id}', 'InboxsController@view');
         
         Route::get('/inbox/read/{id}', 'InboxsController@read');
+
+        Route::get('/inbox/printPDF/{id}', 'InboxsController@printPDF')->name('printPDF');
 
 
 
