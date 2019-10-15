@@ -1,11 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
  <title>{{ $title }}</title>
 </head>
-<body>  
-		
-  <div>
+<body>    
+
+   <div class="text text-info">
+     <div class="container">
+      <h1>SMS Bersama</h1>
+    <p style="font-size: 10px; font-family: sans-serif;"><b>PT. GRAHA MITRA TEGUH</b></p>      
+    <p style="font-size: 10px; font-family: sans-serif;"><b>Jl. KH. Zainul Arifin. Ruko Ketapang Business Centre. Blok. A29-30</b></p>
+  <hr>    
+    </div>
+  </div>
+
+  <div>    
   	<h1>INVOICE</h1>  
   	<h1 class="mt-3">Status : Belum Dibayar</h1>  	  	  	
   	 <h3 class="mt-5">Kode Booking : A001xx1  </h3> 

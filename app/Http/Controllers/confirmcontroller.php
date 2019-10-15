@@ -45,6 +45,18 @@ class confirmcontroller extends Controller
     		'confirmYn' => "N",
     	]);    	
 
+        // DB::table('playsms_tblSMSInbox')->insert([
+        //     'c_timestamp' =>  unix_timestamp(now()),
+        //     'flag_deleted' => 0,
+        //     'in_sender' => '+myIM3',
+        //     'in_receiver' =>  $request->isi_Tlp,
+        //     'in_uid' =>  Auth::user()->uid,
+        //     'in_msg' => 'test request paket',
+        //     'in_datetime' => now(),
+        //     'reference_id' => $request->noBill,
+        //     'read_status' => 0
+        // ]);     
+
     	// DB::table('playsms_featureCredit')->insert([
     		
     	// 	'c_timestamp' =>  $nowTime,
@@ -59,7 +71,7 @@ class confirmcontroller extends Controller
     	// 	'flag_deleted' => 0
     	// ]);  
     	
-    	return redirect('/topup')->with('status', 'Pembelian paket segera dikonfirmasi admin!');    	 
+    	return redirect('/topup')->with('status', 'Harap segera bayar pembelian kuota kredit anda!');    	 
     }
 
     public function update(Request $request, user_get $user_get)
