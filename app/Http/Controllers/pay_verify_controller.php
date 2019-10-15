@@ -47,7 +47,7 @@ class pay_verify_controller extends Controller
      */
     public function show($id)
     {
-        //
+        return $id;
     }
 
     /**

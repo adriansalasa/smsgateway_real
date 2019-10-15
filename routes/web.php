@@ -41,6 +41,8 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
     Route::get('pay_verify', 'pay_verify_controller@index')->name('pay_verify');
 
+    Route::get('pay_verify/{kdBooking}', 'pay_verify_controller@show')->name('check_verify');
+
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
     Route::get('users', 'UserController@index')->name('users');

@@ -33,6 +33,7 @@ class confirmcontroller extends Controller
     	// 	'confirmYn' => "N" ]);
     	$nowTime = time();
 		$timeHour= date("Y-m-d H:i:s"); 
+        $hrgPaket = $request->isiHrgDb;
 		// return $timeHour;
     	DB::table('Playsms_BuyCredit')->insert([
     		'nomor_tagihan' =>  $request->noBill,
@@ -43,19 +44,20 @@ class confirmcontroller extends Controller
             'noTelp' => $request->isi_Tlp,
     		'createUser' => Auth::user()->uid,
     		'confirmYn' => "N",
+            'paidYn' => "N",
     	]);    	
 
-        // DB::table('playsms_tblSMSInbox')->insert([
-        //     'c_timestamp' =>  unix_timestamp(now()),
-        //     'flag_deleted' => 0,
-        //     'in_sender' => '+myIM3',
-        //     'in_receiver' =>  $request->isi_Tlp,
-        //     'in_uid' =>  Auth::user()->uid,
-        //     'in_msg' => 'test request paket',
-        //     'in_datetime' => now(),
-        //     'reference_id' => $request->noBill,
-        //     'read_status' => 0
-        // ]);     
+        DB::table('playsms_tblSMSInbox')->insert([
+            'c_timestamp' =>  now()->timestamp,
+            'flag_deleted' => 0,
+            'in_sender' => '+myIM3',
+            'in_receiver' =>  $request->isi_Tlp,
+            'in_uid' =>  Auth::user()->uid,
+            'in_msg' => "Request Paket, klik Download untuk Cek Tagihan anda ",
+            'in_datetime' => now(),
+            'reference_id' => $request->noBill,
+            'read_status' => 0
+        ]);     
 
     	// DB::table('playsms_featureCredit')->insert([
     		

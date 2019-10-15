@@ -36,33 +36,38 @@
          <!--    <div class="container">                 
               <div class="row">   --> 
               <div class="card-body">
-                <form method="POST" action="">
-                  @csrf
+                <!-- <form method="POST" action="">
+                  @csrf -->
+
                   <div class="form-group row">
                       <label for="kdBooking" class="col-sm-3 ml-4 col-form-label" >Kode Booking</label> 
                       <div class="col-sm-8">
+                        <form method="get" action="/pay_verify/1">
+                          @csrf                        
                           <input type="text" name="kdBooking" id="kdBooking" class="form-control">
-                      </div>                     
+                          <input type="submit" class="btn btn-danger mt-3" name="chkBooking" id="chkBooking" value="Check" >
+                        </form>
+                      </div>                          
                   </div>
 
                   <div class="form-group row">
                       <label for="trans_bank" class="col-sm-3 ml-4 col-form-label" >Transfer Bank</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="trans_bank" id="trans_bank" class="form-control">
+                          <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Jenis Rekening" readonly>
                       </div>                     
                   </div>
 
                   <div class="form-group row">
                       <label for="rek_No" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="number" name="rek_No" id="rek_No" class="form-control">
+                          <input type="number" name="rek_No" id="rek_No" class="form-control" placeholder="Nomor Rekening anda" readonly>
                       </div>                     
                   </div>
 
                   <div class="form-group row">
                       <label for="rek_Name" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rek_Name" id="rek_Name" class="form-control">
+                          <input type="text" name="rek_Name" id="rek_Name" class="form-control" placeholder="Nama Pemilik Rekening" readonly>
                       </div>                     
                   </div>
 
@@ -82,8 +87,8 @@
                       <label for="rek_Name" class="ml-4 mr-2" style="font-family: lucida console; text-align: left; padding: 5px;">Nama Pemilik</label>
                       <input type="text" name="rek_Name" id="rek_Name" class="form-control form-control-sm mb-2 mt-2 ml-4">
                   </div> -->
-                <button type="submit" class="form-control btn btn-info">Process</button>
-                </form>
+            <!--     <button type="submit" class="form-control btn btn-info">Process</button>
+                </form> -->
               </div>
           <!--     </div>
             </div> -->

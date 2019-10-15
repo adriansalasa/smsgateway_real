@@ -50,7 +50,12 @@ Inbox
                     <tr>
                       <th>Message</th>
                       <td>:</td>
-                      <td>{{$data->in_msg}} <a href="{{url('pesan/inbox/printPDF/'.$data->in_msg)}}"> Download</a>   </td>
+                      <td>
+                        @if($data->reference_id >0)
+                        {{$data->in_msg}} <a class="ml-2" href="{{url('pesan/inbox/printPDF/'.$data->in_msg)}}"> Download</a></td>
+                        @else
+                        {{$data->in_msg}} <a href="{{url('pesan/inbox/printPDF/'.$data->in_msg)}}"></a></td>
+                        @endif
                     </tr>
 
                     <tr>

@@ -114,7 +114,7 @@ class InboxsController extends Controller
         
         // $pdf = PDF::loadView('printPDF', $data);  
           $pdf = PDF::loadView('admin.inbox.printPDF', $data);  
-        return $pdf->download('medium.pdf');        
+        return $pdf->download('Bill_Paket.pdf');        
     }
 
     /**
