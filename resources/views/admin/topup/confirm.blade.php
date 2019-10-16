@@ -90,6 +90,7 @@
                 	<div class="row"> 
 	                    <label for="lbl_Trek" class="ml-4" style="font-family: lucida console; text-align: left; padding: 5px;">Transfer Via : </label>	                    
 	                    <label for="lbl_TATM" class="ml-4" style="font-family: lucida console; text-align: left; padding: 5px;">ATM {{ $rVal}}</label>	                    
+	                    <input type="hidden" name="lbl_TATM" id="lbl_TATM" value="{{ $rVal}}">  
                 	</div>
 
                 	<div class="row"> 

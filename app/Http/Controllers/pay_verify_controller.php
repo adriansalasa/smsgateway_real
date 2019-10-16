@@ -45,9 +45,10 @@ class pay_verify_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        return $id;
+    public function show(request $request)
+    {        
+        $CCredits = buycredit::all()->where('nomor_tagihan', $request->kdBooking)->first();                   
+        return view('admin.pay_verify.exist', ['CCredits' => $CCredits]);        
     }
 
     /**

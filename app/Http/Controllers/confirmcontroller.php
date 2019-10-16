@@ -23,18 +23,11 @@ class confirmcontroller extends Controller
 
     public function store(Request $request)
     {
-    	// buycredit::create([
-    	// 	'nomor_tagihan' => $request->noBill,
-    	// 	'nominal' => $request->isiHrgDb,
-    	// 	'idUser' => "3",
-    	// 	'noRek' => $request->noRekv,
-    	// 	'nmRek' => $request->namaRek,
-    	// 	'createUser' => "System",
-    	// 	'confirmYn' => "N" ]);
+    
     	$nowTime = time();
 		$timeHour= date("Y-m-d H:i:s"); 
-        $hrgPaket = $request->isiHrgDb;
-		// return $timeHour;
+        $hrgPaket = $request->isiHrgDb;        
+		
     	DB::table('Playsms_BuyCredit')->insert([
     		'nomor_tagihan' =>  $request->noBill,
     		'nominal' =>  $request->isiHrgDb,
@@ -45,6 +38,7 @@ class confirmcontroller extends Controller
     		'createUser' => Auth::user()->uid,
     		'confirmYn' => "N",
             'paidYn' => "N",
+            'nm_ATM' => $request->lbl_TATM
     	]);    	
 
         DB::table('playsms_tblSMSInbox')->insert([
