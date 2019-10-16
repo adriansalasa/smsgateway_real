@@ -43,6 +43,8 @@ Route::name('admin.')->prefix('/')->middleware('Login')->group(function() {
 
     Route::patch('pay_verify', 'pay_verify_controller@show')->name('exist');
 
+    Route::POST('pay_verify', 'pay_verify_controller@store')->name('proc_purch');
+
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 
     Route::get('users', 'UserController@index')->name('users');

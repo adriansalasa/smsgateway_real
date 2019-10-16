@@ -34,9 +34,24 @@ class pay_verify_controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, buycredit $buycredit)
     {
-        //
+
+        $request->validate([
+            'rek_Buyer' => 'required',
+            'rNm_Buyer' => 'required'
+        ]);
+
+        // buycredit::where('nomor_tagihan', $request->Hid_kdBooking)
+        //          ->update([
+        //             'paidYn' => 'Y'
+        //          ]);
+
+        DB::table('Playsms_BuyCredit')->where('nomor_tagihan',$request->Hid_kdBooking)->update([
+        'paidYn' => 'Y'
+        ]);                     
+
+        return redirect(route('admin.pay_verify'))->with('status', 'Paket anda segera dikonfirmasi admin..!');
     }
 
     /**
@@ -46,9 +61,18 @@ class pay_verify_controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(request $request)
-    {        
-        $CCredits = buycredit::all()->where('nomor_tagihan', $request->kdBooking)->first();                   
-        return view('admin.pay_verify.exist', ['CCredits' => $CCredits]);        
+    {   
+        $request->validate([
+          'kdBooking' => 'required'  
+        ]);     
+        $CCredits = buycredit::all()->where('nomor_tagihan', $request->kdBooking)->where('paidYn', 'N')->first();            
+
+        if(is_null($CCredits))
+        {
+            return view('admin.pay_verify.index'); 
+        }else{            
+            return view('admin.pay_verify.exist', ['CCredits' => $CCredits]);                            
+        }
     }
 
     /**

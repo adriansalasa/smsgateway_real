@@ -9,5 +9,5 @@ class buycredit extends Model
     protected $table = 'Playsms_BuyCredit';
 
     protected $fillable = ['nomor_tagihan', 'nominal', 'idUser', 'noRek', 'nmRek', 'createUser', 
-    					  'confirmYn', 'nm_ATM'];
+    					  'confirmYn', 'paidYn', 'nm_ATM'];
 }

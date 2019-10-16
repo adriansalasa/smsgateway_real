@@ -33,24 +33,51 @@
              </div>
               
               
-              <div class="card-body">                                  
+              <div class="card-body"> 
+
+                                            
                   <div class="form-group row">
                       <label for="kdBooking" class="col-sm-3 ml-4 col-form-label" >Kode Booking</label> 
                       <div class="col-sm-8">    
-                      <form method="POST" action="/pay_verify">
+                      <form method="POST" action="/pay_verify" name="frm_verify">
                           @csrf
-                          @method('patch')                             
+                          @method('patch')      
+
                           <input type="text" name="kdBooking" id="kdBooking" class="form-control" value="{{ $CCredits->nomor_tagihan}}" > 
                            <input type="submit" class="btn btn-danger mt-3" name="chkBooking" id="chkBooking" value="Check" >                    
                           </form>                                               
                       </div>                          
                   </div>
-
+                  <form method="POST" action="/pay_verify" name="post_Verify">
+                  @csrf      
                   <div class="form-group row">
                       <label for="trans_bank" class="col-sm-3 ml-4 col-form-label" >Transfer Bank</label> 
                       <div class="col-sm-8">
                           <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Jenis Rekening" value="{{ $CCredits->nm_ATM}}" readonly >
+                          <input type="hidden" name="Hid_kdBooking" id="Hid_kdBooking" value="{{ $CCredits->nomor_tagihan}}" > 
                       </div>                     
+                  </div>
+
+                  <div class="form-group row">
+                     <input type="bts_Rpem" name="bts_Rpem" id="bts_Rpem" class="form-control bg-primary text-white " value="Rekening Pembeli" readonly >
+                  </div>
+
+                  <div class="form-group row">
+                      <label for="rek_Buyer" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
+                      <div class="col-sm-8">
+                          <input type="text" name="rek_Buyer" id="rek_Buyer" class="form-control" placeholder="Nomor Rekening anda" >
+                      </div>                     
+                  </div>
+
+                  <div class="form-group row">
+                      <label for="rNm_Buyer" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
+                      <div class="col-sm-8">
+                          <input type="text" name="rNm_Buyer" id="rNm_Buyer" class="form-control" placeholder="Nama Pemilik Rekening" >
+                      </div>                     
+                  </div>
+
+                  <div class="form-group row">
+                     <input type="bts_Rpen" name="bts_Rpen" id="bts_Rpen" class="form-control bg-danger text-white " value="Rekening Penjual" readonly >
                   </div>
 
                   <div class="form-group row">
@@ -66,7 +93,9 @@
                           <input type="text" name="rek_Name" id="rek_Name" class="form-control" placeholder="Nama Pemilik Rekening" value="{{ $CCredits->nmRek}}" readonly>
                       </div>                     
                   </div>
-                               
+
+                  <button type="submit" class="btn btn-info form-control" name="btn_post_Verify">Process</button>
+               </form>                
               </div>
               
 
@@ -78,25 +107,7 @@
   </div>
 </section>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript"> 
 
-  //Hilangkan tampilan message with status dlm 2 detik
-  $(document).ready( function() {
-    $('#disappear').delay(2000).fadeOut();
-  });
-
-  //Refresh jumlah saldo yang tersisa dlm 5 detik
-  var auto_refresh = setInterval(
-  function ()
-  {
-  $('.sCredit').load(location.href + " #divSaldo").fadeIn("slow");
-  }, 3000); // refresh every 15000 milliseconds
-
-
-</script>
 
 
 @endsection
