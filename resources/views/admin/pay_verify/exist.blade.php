@@ -37,13 +37,13 @@
 
                                             
                   <div class="form-group row">
-                      <label for="kdBooking" class="col-sm-3 ml-4 col-form-label" >Kode Booking</label> 
+                      <label for="kdBooking" class="col-sm-3 ml-4 col-form-label" >Nomor. Tagihan</label> 
                       <div class="col-sm-8">    
                       <form method="POST" action="/pay_verify" name="frm_verify">
                           @csrf
                           @method('patch')      
 
-                          <input type="text" name="kdBooking" id="kdBooking" class="form-control" value="{{ $CCredits->nomor_tagihan}}" > 
+                          <input type="text" name="kdBooking" id="kdBooking" class="form-control" value="{{ $CCredits->nomor_tagihan}}" placeholder="Ketikan nomor tagihan anda..." > 
                            <input type="submit" class="btn btn-danger mt-3" name="chkBooking" id="chkBooking" value="Check" >                    
                           </form>                                               
                       </div>                          

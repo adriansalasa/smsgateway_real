@@ -26,10 +26,27 @@ class confirmcontroller extends Controller
     
     	$nowTime = time();
 		$timeHour= date("Y-m-d H:i:s"); 
-        $hrgPaket = $request->isiHrgDb;        
+        $hrgPaket = $request->isiHrgDb; 
+        $tmpHour= date("md");  
+        $tmpNomor = $request->noBill;
+        $tmpNobill = $tmpHour . '' . $tmpNomor;   
+
+        $cntBuy = buycredit::max('idTagihan');
+
+        if(is_null($cntBuy) || $cntBuy === 0 )
+        {
+            $tmpNobill = $tmpNobill . '' . 0;   
+
+            $tmpNobill = ((int)$tmpNobill) + 1 ;   
+
+        }else{
+            $tmpNobill = ((int)$tmpNobill) + 1 ;
+        }
+
+        
 		
     	DB::table('Playsms_BuyCredit')->insert([
-    		'nomor_tagihan' =>  $request->noBill,
+    		'nomor_tagihan' =>  $tmpNobill,
     		'nominal' =>  $request->isiHrgDb,
     		'idUser' =>  Auth::user()->uid,
     		'noRek' =>  $request->noRekv,
@@ -49,7 +66,7 @@ class confirmcontroller extends Controller
             'in_uid' =>  Auth::user()->uid,
             'in_msg' => "Request Paket, klik Download untuk Cek Tagihan anda ",
             'in_datetime' => now(),
-            'reference_id' => $request->noBill,
+            'reference_id' => $tmpNobill,
             'read_status' => 0
         ]);     
 
