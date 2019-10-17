@@ -57,43 +57,43 @@
                   <div class="form-group row">
                       <label for="trans_bank" class="col-sm-3 ml-4 col-form-label" >Transfer Bank</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Jenis Rekening" readonly>
+                          <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Jenis Rekening" disabled>
                       </div>                     
                   </div>
 
                   <div class="form-group row">
-                     <input type="bts_Rpem" name="bts_Rpem" id="bts_Rpem" class="form-control bg-primary text-white " value="Rekening Pembeli" readonly >
+                     <input type="bts_Rpem" name="bts_Rpem" id="bts_Rpem" class="form-control bg-primary text-white " value="Rekening Pembeli" disabled >
                   </div>
                   
                   <div class="form-group row">
                       <label for="rek_Buyer" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rek_Buyer" id="rek_Buyer" class="form-control" placeholder="Nomor Rekening anda" >
+                          <input type="text" name="rek_Buyer" id="rek_Buyer" class="form-control" placeholder="Nomor Rekening anda" disabled>
                       </div>                     
                   </div>
 
                   <div class="form-group row">
                       <label for="rNm_Buyer" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rNm_Buyer" id="rNm_Buyer" class="form-control" placeholder="Nama Pemilik Rekening" >
+                          <input type="text" name="rNm_Buyer" id="rNm_Buyer" class="form-control" placeholder="Nama Pemilik Rekening" disabled>
                       </div>                     
                   </div>
 
                   <div class="form-group row">
-                     <input type="bts_Rpen" name="bts_Rpen" id="bts_Rpen" class="form-control bg-danger text-white " value="Rekening Penjual" readonly >
+                     <input type="bts_Rpen" name="bts_Rpen" id="bts_Rpen" class="form-control bg-danger text-white " value="Rekening Penjual" disabled >
                   </div>
 
                   <div class="form-group row">
                       <label for="rek_No" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="number" name="rek_No" id="rek_No" class="form-control" placeholder="Nomor Rekening anda" readonly>
+                          <input type="number" name="rek_No" id="rek_No" class="form-control" placeholder="Nomor Rekening anda" disabled>
                       </div>                     
                   </div>
 
                   <div class="form-group row">
                       <label for="rek_Name" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rek_Name" id="rek_Name" class="form-control" placeholder="Nama Pemilik Rekening" readonly>
+                          <input type="text" name="rek_Name" id="rek_Name" class="form-control" placeholder="Nama Pemilik Rekening" disabled>
                       </div>                     
                   </div>
 

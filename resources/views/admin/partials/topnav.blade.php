@@ -48,7 +48,7 @@
     
      <li class="dropdown dropdown-list-toggle sNotif" id="divNotif">         
 
-       @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->get() as $JmlNotifitems)
+       @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->where('paidYn', 'Y')->get() as $JmlNotifitems)
             
         @if ($JmlNotifitems->cntNotif > 0 )     
         
@@ -92,7 +92,7 @@
 
                 @foreach(App\buycredit::SELECT('idTagihan', 'username', 'noTelp', 'nominal',
                 DB::raw("CONCAT('Request pengisian paket',' ', Playsms_BuyCredit.nominal) AS detailMessages"), 
-                'createDt')->JOIN('playsms_tblUser', 'idUser', '=', 'uid')->where('confirmYn', 'N')->orderBy('createDt', 'DESC')->get() as $Notifitems)
+                'createDt')->JOIN('playsms_tblUser', 'idUser', '=', 'uid')->where('confirmYn', 'N')->where('paidYn', 'Y')->orderBy('createDt', 'DESC')->get() as $Notifitems)
 
                 
                   <a href="{{url('notification')}}" class="dropdown-item dropdown-item-unread">

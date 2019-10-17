@@ -31,7 +31,7 @@ class DashboardController extends Controller
         $queue=Outbox::where('uid', Auth::user()->uid)->where('p_status', '0')->count();
         $pb=Phonebook::where('uid', Auth::user()->uid)->count();
         $failed=Outbox::where('uid', Auth::user()->uid)->where('p_status', '2')->count();
-        $notif=buycredit::where('confirmYn', 'N')->count();
+        $notif=buycredit::where('confirmYn', 'N')->where('paidYn', 'Y')->count();
 
     	$tahun=date('Y');
     	$tgl_inbox = Inbox::selectRaw('year(in_datetime) year, monthname(in_datetime) month, count(*) data')

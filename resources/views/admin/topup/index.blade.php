@@ -57,7 +57,7 @@
   @if (session('status'))
       <div id="disappear" class="alert alert-success alert-dismissible">
         <button type="button" class="close">&times;</button>
-         <strong>Harap Menunggu...!</strong> {{ session('status') }}
+         <strong>Harap Dibayar...!</strong> {{ session('status') }}
       </div>
   @endif    
    

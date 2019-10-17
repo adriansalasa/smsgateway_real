@@ -67,7 +67,7 @@ class confirmcontroller extends Controller
     	// 	'flag_deleted' => 0
     	// ]);  
     	
-    	return redirect('/topup')->with('status', 'Harap segera bayar pembelian kuota kredit anda!');    	 
+    	return redirect('/topup')->with('status', 'pembelian kuota kredit anda menunggu pembayaran!');    	 
     }
 
     public function update(Request $request, user_get $user_get)

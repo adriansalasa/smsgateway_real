@@ -18,10 +18,10 @@ class notificationcontroller extends Controller
      */
     public function index()
     {
-        $notifdb = notifdata::where('confirmYn', 'N')
+        $notifdb = notifdata::where('confirmYn', 'N')->where('paidYn', 'Y')
                     ->get();
 
-         $notifN = buycredit::where('confirmYn', 'N')->count();
+         $notifN = buycredit::where('confirmYn', 'N')->where('paidYn', 'Y')->count();
 
          return view('admin.notification.index', compact('notifdb', 'notifN'));         
         // return $notifdata;
