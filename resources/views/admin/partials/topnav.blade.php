@@ -131,14 +131,19 @@
      @if(Auth::user()->uid == '1')     
 
      <i class="fa fa-envelope"></i>
-     <span class="badge badge-warning align-top ml-1"> {{ $Notf_msg->msgNotif}}</span> 
+
+         @if($Notf_msg->msgNotif)
+            <span class="badge badge-warning align-top ml-1"> {{ $Notf_msg->msgNotif}}</span> 
+         @endif
      <!-- <span class="badgePill badgePill badge-warning align-top ml-1 "> {{ $Notf_msg->msgNotif}}</span>  -->
 
      @else
 
      <i class="far fa-bell"></i>            
      <!-- <span class="badgePill badgePill badge-warning align-top "> {{ $Notf_msg->msgNotif}}</span>  -->
-     <span class="badge badge-warning align-top"> {{ $Notf_msg->msgNotif}}</span> 
+         @if($Notf_msg->msgNotif)
+            <span class="badge badge-warning align-top"> {{ $Notf_msg->msgNotif}}</span> 
+         @endif
 
      @endif
 
