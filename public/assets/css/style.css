@@ -4672,6 +4672,145 @@ pre {
 
 
 
+/* 3.24 Custom Badge */
+
+.badgesPill .badgePill {
+
+  margin: 0 8px 10px 0;      
+}
+
+
+.badgePill {  
+
+  vertical-align: top;
+
+  padding: 2px 5px;
+
+  font-weight: 600;
+
+  letter-spacing: .3px;
+
+  border-radius: 30px;
+
+  font-size: 12px; 
+
+ /* position: absolute;
+
+   top: 2px;
+
+   right: 8px;
+
+   height: 7px;
+
+   width: 7px;*/
+
+ 
+}
+
+  .badgePill.badge-warning {
+
+    color: #fff; }
+
+  .badgePill.badge-primary {
+
+    background-color: #6777ef; }
+
+  .badgePill.badge-secondary {
+
+    background-color: #34395e; }
+
+  .badgePill.badge-success {
+
+    background-color: #47c363; }
+
+  .badgePill.badge-info {
+
+    background-color: #3abaf4; }
+
+  .badgePill.badge-danger {
+
+    background-color: #fc544b; }
+
+  .badgePill.badge-light {
+
+    background-color: #e3eaef;
+
+    color: #191d21; }
+
+  .badgePill.badge-white {
+
+    background-color: #ffffff;
+
+    color: #191d21; }
+
+  .badgePill.badge-dark {
+
+    background-color: #191d21; }
+
+
+
+h1 .badgePill {
+
+  font-size: 24px;
+
+  padding: 16px 21px; }
+
+
+
+h2 .badgePill {
+
+  font-size: 22px;
+
+  padding: 14px 19px; }
+
+
+
+h3 .badgePill {
+
+  font-size: 18px;
+
+  padding: 11px 16px; }
+
+
+
+h4 .badgePill {
+
+  font-size: 16px;
+
+  padding: 8px 13px; }
+
+
+
+h5 .badgePill {
+
+  font-size: 14px;
+
+  padding: 5px 10px; }
+
+
+
+h6 .badgePill {
+
+  font-size: 11px;
+
+  padding: 3px 8px; }
+
+
+
+.btn .badgePill {
+
+  margin-left: 5px;
+
+  padding: 4px 7px; }
+
+  .btn .badgePill.badge-transparent {
+
+    background-color: rgba(255, 255, 255, 0.25);
+
+    color: #fff; }
+
+
+
 /* 4.2 Section */
 
 .section {

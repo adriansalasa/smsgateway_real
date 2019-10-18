@@ -55,6 +55,7 @@
           <a href="{{url('notification')}}" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
               <i class="far fa-bell"></i>       
               <span class="badge badge-warning align-top">{{ $JmlNotifitems->cntNotif}}</span> 
+              <!-- <span class="badgePill badge-warning align-top">{{ $JmlNotifitems->cntNotif}}</span>  -->
           </a>       
 
            <!-- <iframe src="{{url('sound/Bell.mp3')}}" allow="autoplay"
@@ -130,12 +131,14 @@
      @if(Auth::user()->uid == '1')     
 
      <i class="fa fa-envelope"></i>
-     <span class="badge badge-warning align-top">{{ $Notf_msg->msgNotif}}</span> 
+     <span class="badge badge-warning align-top ml-1"> {{ $Notf_msg->msgNotif}}</span> 
+     <!-- <span class="badgePill badgePill badge-warning align-top ml-1 "> {{ $Notf_msg->msgNotif}}</span>  -->
 
      @else
 
      <i class="far fa-bell"></i>            
-     <span class="badge badge-warning align-top">{{ $Notf_msg->msgNotif}}</span> 
+     <!-- <span class="badgePill badgePill badge-warning align-top "> {{ $Notf_msg->msgNotif}}</span>  -->
+     <span class="badge badge-warning align-top"> {{ $Notf_msg->msgNotif}}</span> 
 
      @endif
 
