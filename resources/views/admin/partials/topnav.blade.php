@@ -124,13 +124,18 @@
 
   <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg{{ Auth::user()->unreadNotifications->count() ? ' beep' : '' }}"><!-- <i class="far fa-bell"></i> -->
 
+     @foreach(App\Inbox::select(DB::raw('count(in_id) as msgNotif'))->where('read_status', '0')->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->get() as $Notf_msg)    
+     @endforeach
+
      @if(Auth::user()->uid == '1')     
 
      <i class="fa fa-envelope"></i>
+     <span class="badge badge-warning align-top">{{ $Notf_msg->msgNotif}}</span> 
 
      @else
 
-     <i class="far fa-bell"></i>
+     <i class="far fa-bell"></i>            
+     <span class="badge badge-warning align-top">{{ $Notf_msg->msgNotif}}</span> 
 
      @endif
 
@@ -156,8 +161,9 @@
       <div class="dropdown-list-content dropdown-list-icons">
         @if(App\Inbox::select('in_id', 'in_sender', 'in_msg', 'in_datetime')->where('read_status', 0)->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->count() == 0)
         <p class="text-muted p-2 text-center">No notifications found!</p>
-        @else
 
+        @else
+       
         @foreach(App\Inbox::select('in_id', 'in_sender', 'in_msg', 'in_datetime')->where('read_status', 0)->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->get() as $items)
 
         <a href="{{url('pesan/inbox/view/'.$items->in_id)}}" class="dropdown-item dropdown-item-unread">

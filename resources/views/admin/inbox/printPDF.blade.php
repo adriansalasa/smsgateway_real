@@ -16,7 +16,7 @@
 
   <div>    
   	<h1>INVOICE</h1>  
-  	<h1 class="mt-3">Status : Belum Dibayar</h1>  	  	  	
+  	<h1 class="mt-4">Status : Belum Dibayar</h1>  	  	  	
   	 <h3 class="mt-5">No. Tagihan : {{$NoBill}}  </h3> 
      <p class="mt-3 ml-2">Pembelian : Pulsa {{ $Nominal}}</p> 
      <p class="mt-2 ml-2">No Telp   : {{ $NoTelp}}</p> 
