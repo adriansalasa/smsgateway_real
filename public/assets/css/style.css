@@ -4676,10 +4676,11 @@ pre {
 
 /* 3.24 Custom Badge */
 
-.badgesPill .badgePill {
+.badgePill .badgePill {
 
   margin: 0 8px 10px 0;      
-}
+
+} 
 
 
 .badgePill {  
@@ -4700,7 +4701,7 @@ pre {
 
    top: 2px;
 
-   right: 8px;
+   right: 8px; 
 
    height: 7px;
 
@@ -4709,8 +4710,7 @@ pre {
  
 }
 
-  .badgePill.badge-warning {
-
+  .badgePill.badge-warning {    
     color: #fff; }
 
   .badgePill.badge-primary {

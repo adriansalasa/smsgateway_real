@@ -11,10 +11,6 @@
 
 @section('content')
 
-@if(Auth::user()->uid == '1')   
-        
-     <!-- <head><meta http-equiv="refresh" content="12; URL={{ route('admin.notification') }}"></head> -->
- @endif    
 
 <section class="section">
  

@@ -42,54 +42,54 @@
 
 <ul class="navbar-nav navbar-right">
 
-  @if(Auth::user()->uid == '1')
- 
-   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+  @if(Auth::user()->uid == '1')   
     
      <li class="dropdown dropdown-list-toggle sNotif" id="divNotif">         
 
        @foreach(App\buycredit::select(DB::raw('count(idtagihan) as cntNotif'))->where('confirmYn', 'N')->where('paidYn', 'Y')->get() as $JmlNotifitems)
             
-        @if ($JmlNotifitems->cntNotif > 0 )     
-        
-          <a href="{{url('notification')}}" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-              <i class="far fa-bell"></i>       
-              <!-- <span class="badge badge-warning align-top">{{ $JmlNotifitems->cntNotif}}</span>  -->
-              <span class="badgePill badgePill badge-warning align-top ml-1 "></span>               
-          </a>                  
+          @if ($JmlNotifitems->cntNotif > 0 )     
+          
+            <a href="{{url('notification')}}" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
+                <i class="far fa-bell"></i>       
+                <span class="badgePill badgePill badge-warning align-top"></span> 
+                <!-- <span class="badgePill badge-warning align-top">{{ $JmlNotifitems->cntNotif}}</span>  -->
+            </a>       
+            
+            <audio id="iframeAudio" autoplay>
+                <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
+            </audio>
+                        
+          @else   
 
-          <audio id="iframeAudio" autoplay>
-              <source src="{{url('sound/Bell.mp3')}}" type="audio/mp3">
-          </audio>    
-                 
-        @else   
+            <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
+                <i class="far fa-bell"></i>
+            </a>
 
-          <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-              <i class="far fa-bell"></i>
-          </a>
-
-        @endif
+          @endif
 
         @endforeach
 
         <div class="dropdown-menu dropdown-list dropdown-menu-right">
 
-          @if($JmlNotifitems->cntNotif > 0 )
-            <div class="dropdown-header">{{ $JmlNotifitems->cntNotif}} Request</div>  
+          @if($JmlNotifitems->cntNotif == 0)
+              <div class="dropdown-header">Request</div>  
           @else
-            <div class="dropdown-header">Request</div>  
+              <div class="dropdown-header">{{ $JmlNotifitems->cntNotif }} Request</div>  
           @endif
 
-            <div class="dropdown-list-content dropdown-list-icons"> 
-                @if($JmlNotifitems->cntNotif === 0)
-                  <p class="text-muted p-2 text-center">No Request found!</p>            
-                @endif
-
-                @foreach(App\buycredit::SELECT('idTagihan', 'username', 'noTelp', 'nominal',
-                DB::raw("CONCAT('Request pengisian paket',' ', Playsms_BuyCredit.nominal) AS detailMessages"), 
-                'createDt')->JOIN('playsms_tblUser', 'idUser', '=', 'uid')->where('confirmYn', 'N')->where('paidYn', 'Y')->orderBy('createDt', 'DESC')->get() as $Notifitems)
-                                
-                  <a href="{{url('notification')}}" class="dropdown-item dropdown-item-unread">
+            <div class="dropdown-list-content dropdown-list-icons">  
+                @if($JmlNotifitems->cntNotif == 0)
+                  <p class="text-muted P-2 text-center">No Request Found!</p>           
+              
+                @else
+                  @foreach(App\buycredit::SELECT('idTagihan', 'username', 'noTelp', 'nominal',
+                  DB::raw("CONCAT('Request pengisian paket',' ', Playsms_BuyCredit.nominal) AS detailMessages"), 
+                  'createDt')->JOIN('playsms_tblUser', 'idUser', '=', 'uid')->where('confirmYn', 'N')->where('paidYn', 'Y')->orderBy('createDt', 'DESC')->get() as $Notifitems)
+                  
+                    <a href="{{url('notification')}}" class="dropdown-item dropdown-item-unread">
 
                     <div class="dropdown-item-icon bg-danger text-white">
 
@@ -105,9 +105,9 @@
 
                     </div>
 
-                  </a>
-                
-                @endforeach
+                    </a>
+                  @endforeach
+                @endif
                                 
             </div>
 
@@ -117,50 +117,39 @@
 
     @endif
 
-  <li class="dropdown dropdown-list-toggle">
+  <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg"><!-- <i class="far fa-bell"></i> -->
 
-    <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg{{ Auth::user()->unreadNotifications->count() ? ' beep' : '' }}"><!-- <i class="far fa-bell"></i> -->
+     @foreach(App\Inbox::select(DB::raw('count(in_id) as msgNotif'))->where('read_status', '0')->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->get() as $Notf_msg)    
+     @endforeach
 
-       @foreach(App\Inbox::select(DB::raw('count(in_id) as msgNotif'))->where('read_status', '0')->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->get() as $Notf_msg)    
-       @endforeach
+     @if(Auth::user()->uid == '1')     
 
-       @if(Auth::user()->uid == '1')     
+     <i class="fa fa-envelope"></i>
 
-          <i class="fa fa-envelope"></i>
-
-          @if($Notf_msg->msgNotif)
-             <!-- <span class="badge badge-warning align-top ml-1"> {{ $Notf_msg->msgNotif}}</span>  -->
-            <span class="badgePill badgePill badge-warning align-top ml-1 "></span> 
-          @endif
-
-       @else
-
-          <i class="far fa-bell"></i>            
-
-          @if($Notf_msg->msgNotif)
-             <!-- <span class="badge badge-warning align-top"> {{ $Notf_msg->msgNotif}}</span>          -->
-             <span class="badgePill badgePill badge-warning align-top ml-1 "></span>  
-          @endif
-
+       @if($Notf_msg->msgNotif)
+          <span class="badgePill badgePill badge-warning align-top ml-1"></span> 
+          <!-- <span class="badgePill badgePill badge-warning align-top ml-1 "> {{ $Notf_msg->msgNotif}}</span>  -->
        @endif
 
-    </a>
+     @else
+
+     <i class="far fa-bell"></i>            
+
+     @if($Notf_msg->msgNotif)
+        <span class=" badgePill badgePill badge-warning "></span> 
+     @endif
+
+     @endif
+
+  </a>
 
     <div class="dropdown-menu dropdown-list dropdown-menu-right">     
 
       <div class="dropdown-header">
           @if(Auth::user()->uid == '1')
-             @if($Notf_msg->msgNotif > 0)
-                {{ $Notf_msg->msgNotif}} Messages
-             @else
-                Messages
-             @endif
+              Messages
           @else
-              @if($JmlNotifitems->cntNotif > 0)
-                 {{ $JmlNotifitems->cntNotif}} Notifications
-              @else
-                  Notifications
-              @endif
+              Notifications
           @endif
 
         <div class="float-right">
