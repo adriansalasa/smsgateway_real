@@ -4686,7 +4686,7 @@ pre {
 
   vertical-align: top;
 
-  padding: 2px 5px;
+  padding: 2px 2px;
 
   font-weight: 600;
 
@@ -4696,7 +4696,7 @@ pre {
 
   font-size: 12px; 
 
- /* position: absolute;
+  position: absolute;
 
    top: 2px;
 
@@ -4704,7 +4704,7 @@ pre {
 
    height: 7px;
 
-   width: 7px;*/
+   width: 7px;
 
  
 }
