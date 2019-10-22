@@ -21,19 +21,17 @@
   
   </ul>
 
+    <div class="search-element">
 
-  <div class="search-element">
+      <input class="form-control" value="{{ Request::get('query') }}" name="query" type="search" placeholder="Search" aria-label="Search" data-width="250">
 
-    <input class="form-control" value="{{ Request::get('query') }}" name="query" type="search" placeholder="Search" aria-label="Search" data-width="250">
+      <button class="btn" type="submit"><i class="fas fa-search"></i></button>    
 
-    <button class="btn" type="submit"><i class="fas fa-search"></i></button>    
+      <div class="search-backdrop"></div>
 
-    <div class="search-backdrop"></div>
+      {{-- @include('admin.partials.searchhistory') --}}  
 
-    {{-- @include('admin.partials.searchhistory') --}}  
-
-  </div>
-
+    </div>
 
   </ul>
  
@@ -122,47 +120,59 @@
      @foreach(App\Inbox::select(DB::raw('count(in_id) as msgNotif'))->where('read_status', '0')->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->get() as $Notf_msg)    
      @endforeach
 
-     @if(Auth::user()->uid == '1')     
+       @if(Auth::user()->uid == '1')     
 
-     <i class="fa fa-envelope"></i>
+          <i class="fa fa-envelope"></i>
 
-       @if($Notf_msg->msgNotif)
-          <span class="badgePill badgePill badge-warning align-top ml-1"></span> 
-          <!-- <span class="badgePill badgePill badge-warning align-top ml-1 "> {{ $Notf_msg->msgNotif}}</span>  -->
+           @if($Notf_msg->msgNotif)
+              <span class="badgePill badgePill badge-warning align-top ml-1"></span> 
+              <!-- <span class="badgePill badgePill badge-warning align-top ml-1 "> {{ $Notf_msg->msgNotif}}</span>  -->
+           @endif
+
+       @else
+          <i class="far fa-bell"></i>            
+
+           @if($Notf_msg->msgNotif)
+              <span class=" badgePill badgePill badge-warning "></span> 
+           @endif
+
        @endif
-
-     @else
-
-     <i class="far fa-bell"></i>            
-
-     @if($Notf_msg->msgNotif)
-        <span class=" badgePill badgePill badge-warning "></span> 
-     @endif
-
-     @endif
 
   </a>
 
     <div class="dropdown-menu dropdown-list dropdown-menu-right">     
-
       <div class="dropdown-header">
           @if(Auth::user()->uid == '1')
-              Messages
+
+              @if($Notf_msg->msgNotif == 0)
+                  Messages
+              @else
+                  {{ $Notf_msg->msgNotif}} Messages
+              @endif
+
           @else
-              Notifications
+
+              @if($Notf_msg->msgNotif == 0)
+                  Notifications
+              @else
+                  {{ $Notf_msg->msgNotif}} Notifications
+              @endif  
+
           @endif
 
-        <div class="float-right">
-
-          <a href="{{url('pesan/inbox/read/'.Auth::user()->uid)}}">Mark All As Read</a>
-
-        </div>
-
+      <div class="float-right">
+        <a href="{{url('pesan/inbox/read/'.Auth::user()->uid)}}">Mark All As Read</a>
       </div>
+    </div>
 
       <div class="dropdown-list-content dropdown-list-icons">
         @if(App\Inbox::select('in_id', 'in_sender', 'in_msg', 'in_datetime')->where('read_status', 0)->where('in_uid', Auth::user()->uid)->orderBy('in_id', 'DESC')->count() == 0)
-        <p class="text-muted p-2 text-center">No notifications found!</p>
+
+        @if(Auth::user()->uid == '1')
+            <p class="text-muted p-2 text-center">No messages found!</p>
+        @else
+            <p class="text-muted p-2 text-center">No notifications found!</p>
+        @endif
 
         @else
        
