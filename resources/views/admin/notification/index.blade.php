@@ -1,16 +1,13 @@
 @extends('layouts.admin-master')
 
-
-
 @section('title')
 
-'notification'
+Request Notification
 
 @endsection
 
 
 @section('content')
-
 
 <section class="section">
  
@@ -46,16 +43,13 @@
 
             <form name="search" action="{{ url()->current() }}">
 
-            <div class="card-header">
-
-               <!--  <a href="{{ route('admin.compose') }}" class="btn btn-sm btn-info mr-2"><i class="fa fa-check-circle"></i> Confirm </a> -->
+            <div class="card-header">               
 
                <button type="button" class="btn btn-sm btn-info mr-2" id="multiConfirm"><i class="fa fa-check-circle"></i> Confirm</button>
 
                 <button type="button" class="btn btn-sm btn-danger mr-2" id="bulk_delete_contact"><i class="fa fa-trash"></i> Reject</button>
 
                 
-
                 <h4></h4>
 
                 <div class="card-header-form">
@@ -71,9 +65,7 @@
                       <div class="input-group-btn">
 
                         <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-
                         
-
                         <div class="float-right ml-2">
 
                             <select class="form-control-sm" style=" width:80px" name="total" id="total" onchange="getval(this);"> 

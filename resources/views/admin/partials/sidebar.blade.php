@@ -60,8 +60,6 @@
 
       </li>
 
-
-
       <li class="dropdown {{ Request::route()->getName() == 'admin.compose' || Request::route()->getName() == 'admin.inbox' || Request::route()->getName() == 'admin.outbox'  ? ' active' : '' }}">
 
           <a href="#" class="nav-link has-dropdown"><i class="fa fa-envelope"></i> <span>Pesan</span></a>

@@ -4685,7 +4685,7 @@ pre {
 
 .badgePill {  
 
-  vertical-align: top;
+  /*vertical-align: top;
 
   padding: 2px 2px;
 
@@ -4705,7 +4705,28 @@ pre {
 
    height: 7px;
 
-   width: 7px;
+   width: 7px;*/
+  padding: 2px 8px;
+
+  font-weight: 600;
+
+  letter-spacing: .3px;
+
+  border-radius: 30px;
+
+  font-size: 12px; 
+
+  position: relative;
+
+  margin-left: -18px;
+
+  margin-top: -10px;  
+
+  top: -8px;
+
+  right: -4px;
+
+
 
  
 }
@@ -4731,7 +4752,7 @@ pre {
 
   .badgePill.badge-danger {
 
-    background-color: #fc544b; }
+    background-color: #fc544b;}
 
   .badgePill.badge-light {
 
