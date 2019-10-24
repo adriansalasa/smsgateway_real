@@ -84,6 +84,8 @@
 
  *    3.24 Custom Badge
 
+ *    3.25 Required sign
+
  * 4. Theme Style
 
  * 	  4.1 Misc
@@ -4831,6 +4833,16 @@ h6 .badgePill {
     background-color: rgba(255, 255, 255, 0.25);
 
     color: #fff; }
+
+
+
+/* 3.25 Required sign */
+
+.errRequired{
+  color: #FF0000;
+
+  /*font-size: 25px;*/
+}
 
 
 

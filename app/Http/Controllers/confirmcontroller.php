@@ -47,6 +47,7 @@ class confirmcontroller extends Controller
 		
     	DB::table('Playsms_BuyCredit')->insert([
     		'nomor_tagihan' =>  $tmpNobill,
+            'nama_paket' => $request->nmPaket,
     		'nominal' =>  $request->isiHrgDb,
     		'idUser' =>  Auth::user()->uid,
     		'noRek' =>  $request->noRekv,

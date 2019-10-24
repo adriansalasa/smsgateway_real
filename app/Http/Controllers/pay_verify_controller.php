@@ -38,20 +38,20 @@ class pay_verify_controller extends Controller
     {
 
         $request->validate([
-            'rek_Buyer' => 'required',
-            'rNm_Buyer' => 'required'
+            'rek_BuyerEx' => 'required',
+            'rNm_BuyerEx' => 'required'
         ]);
-
+                
         // buycredit::where('nomor_tagihan', $request->Hid_kdBooking)
         //          ->update([
         //             'paidYn' => 'Y'
-        //          ]);
-
-        DB::table('Playsms_BuyCredit')->where('nomor_tagihan',$request->Hid_kdBooking)->update([
-        'paidYn' => 'Y'
+        //          ]);    
+       
+         DB::table('Playsms_BuyCredit')->where('nomor_tagihan',$request->Hid_kdBooking)->update([
+        'paidYn' => 'Y', 'nrek_pembeli' => $request->rek_BuyerEx, 'nmrek_pembeli' => $request->rNm_BuyerEx
         ]);                     
 
-        return redirect(route('admin.pay_verify'))->with('status', 'Paket anda segera dikonfirmasi admin..!');
+        return redirect(route('admin.pay_verify'))->with('status', 'Paket anda segera dikonfirmasi admin..!');               
     }
 
     /**

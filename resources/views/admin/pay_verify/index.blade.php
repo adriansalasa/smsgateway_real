@@ -41,81 +41,67 @@
                   @csrf  -->
                   
                   <div class="form-group row">
-                      <label for="kdBooking" class="col-sm-3 ml-4 col-form-label" >Nomor Tagihan</label> 
+                      <label for="kdBooking" class="col-sm-3 ml-4 col-form-label" >Nomor Tagihan
+                            <span class="errRequired">*</span> 
+                      </label> 
+
                       <div class="col-sm-8">                                 
-                        <form method="POST" action="/pay_verify">
+                        <form method="POST" action="/pay_verify" class="form-inline">
                           @csrf
                           @method('patch')
-                          <input type="text" name="kdBooking" id="kdBooking" class="form-control @error('kdBooking') is-invalid @enderror" placeholder="Ketikan nomor tagihan anda...">
-                          @error('kdBooking')<div class="invalid-feedback">{{ 'Kode Booking tidak boleh kosong..!'}}</div>@enderror
-
-                          <input type="submit" class="btn btn-danger mt-3" name="chkBooking" id="chkBooking" value="Check" >                    
+                          <input type="text" name="kdBooking" id="kdBooking" class="form-control @error('kdBooking') is-invalid @enderror" placeholder="Ketikan nomor tagihan...">                                                 
+                          <input type="submit" class="btn btn-danger btn-lg ml-2" name="chkBooking" id="chkBooking" value="Check" >                    
+                           @error('kdBooking')<div class="invalid-feedback">{{ 'Kode Booking tidak boleh kosong..!'}}</div>@enderror
                         </form>    
                       </div>                          
                   </div>
 
-                  <div class="form-group row">
+                  <!-- <div class="form-group row">
                       <label for="trans_bank" class="col-sm-3 ml-4 col-form-label" >Transfer Bank</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Jenis Rekening" disabled>
+                          <input type="text" name="trans_bank" id="trans_bank" class="form-control"disabled>
                       </div>                     
+                  </div> -->
+
+                  <div class="form-group row">
+                      <label for="nm_Paket" class="col-sm-3 ml-4 col-form-label" >Paket</label> 
+                      <div class="col-sm-8">
+                            <input type="text" name="nm_Paket" id="nm_Paket" class="form-control" placeholder="Nama Paket yang dibeli..." disabled >                          
+                      </div>                     
+                  </div>
+
+                  <div class="form-group row">
+                      <label for="jml_nominal" class="col-sm-3 ml-4 col-form-label" >Harga</label> 
+                          <div class="col-sm-8">                                  
+                              <input type="text" name="jml_nominal" id="jml_nominal" class="form-control" placeholder="Harga Paket..." disabled >
+                          </div>                     
                   </div>
 
                   <div class="form-group row">
                      <input type="bts_Rpem" name="bts_Rpem" id="bts_Rpem" class="form-control bg-primary text-white " value="Rekening Pembeli" disabled >
                   </div>
+
+                  <div class="form-group row">
+                      <label for="trans_bank" class="col-sm-3 ml-4 col-form-label" >Transfer Bank</label> 
+                      <div class="col-sm-8">
+                          <input type="text" name="trans_bank" id="trans_bank" class="form-control"placeholder="Rekening Bank..." disabled>
+                      </div>                     
+                  </div>
                   
                   <div class="form-group row">
                       <label for="rek_Buyer" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rek_Buyer" id="rek_Buyer" class="form-control" placeholder="Nomor Rekening anda" disabled>
+                          <input type="text" name="rek_Buyer" id="rek_Buyer" class="form-control" placeholder="Ketik nomor rekening anda..." disabled>
                       </div>                     
                   </div>
 
                   <div class="form-group row">
                       <label for="rNm_Buyer" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rNm_Buyer" id="rNm_Buyer" class="form-control" placeholder="Nama Pemilik Rekening" disabled>
+                          <input type="text" name="rNm_Buyer" id="rNm_Buyer" class="form-control" placeholder="Ketik nama yang terdaftar atas rekening ini..." disabled>
                       </div>                     
                   </div>
 
-                  <div class="form-group row">
-                     <input type="bts_Rpen" name="bts_Rpen" id="bts_Rpen" class="form-control bg-danger text-white " value="Rekening Penjual" disabled >
-                  </div>
-
-                  <div class="form-group row">
-                      <label for="rek_No" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
-                      <div class="col-sm-8">
-                          <input type="number" name="rek_No" id="rek_No" class="form-control" placeholder="Nomor Rekening anda" disabled>
-                      </div>                     
-                  </div>
-
-                  <div class="form-group row">
-                      <label for="rek_Name" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
-                      <div class="col-sm-8">
-                          <input type="text" name="rek_Name" id="rek_Name" class="form-control" placeholder="Nama Pemilik Rekening" disabled>
-                      </div>                     
-                  </div>
-
-                
-
-                <!--   <div class="form-inline">
-                      <label for="trans_bank" class="ml-4" style="font-family: lucida console; text-align: left; padding: 5px;">Transfer Bank</label>                     
-                      <input type="text" name="trans_bank" id="trans_bank" class="form-control form-control-sm mb-2 mt-2 ml-4">
-                  </div>
-
-                  <div class="form-inline">
-                      <label for="rek_No" class="ml-4" style="font-family: lucida console; text-align: left; padding: 5px;">Nomor Rekening</label>                   
-                      <input type="text" name="rek_No" id="rek_No" class="form-control form-control-sm mb-2 mt-2 ml-3">
-                  </div>
-
-                  <div class="form-inline">
-                      <label for="rek_Name" class="ml-4 mr-2" style="font-family: lucida console; text-align: left; padding: 5px;">Nama Pemilik</label>
-                      <input type="text" name="rek_Name" id="rek_Name" class="form-control form-control-sm mb-2 mt-2 ml-4">
-                  </div> -->
-            <!--     <button type="submit" class="form-control btn btn-info">Process</button>
-                </form> -->
-               
               </div>
               
           <!--     </div>

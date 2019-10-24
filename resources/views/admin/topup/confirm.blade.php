@@ -68,6 +68,7 @@
 				
 					<div class="row">                      
 	                      <label for="nmPaket" class="ml-4" style="font-family: lucida console; text-align: left; padding: 5px;">Paket</label>
+	                       <input type="hidden" name="nmPaket" id="nmPaket" value="{{ $isiPaket}}">	
 	                      <label for="t_1" class="ml-4" style="font-family: lucida console; text-align: left; padding: 5px;">:</label>	                      
 	                      <label for="isiPaket" class="ml-4" style="font-family: lucida console; text-align: left; padding: 5px;">{{ $isiPaket}}</label>   
 	                       <input type="hidden" name="noBill" id="noBill" value="{{ $noBill}}">	                      

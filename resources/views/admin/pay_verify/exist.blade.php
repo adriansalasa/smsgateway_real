@@ -39,60 +39,74 @@
                   <div class="form-group row">
                       <label for="kdBooking" class="col-sm-3 ml-4 col-form-label" >Nomor. Tagihan</label> 
                       <div class="col-sm-8">    
-                      <form method="POST" action="/pay_verify" name="frm_verify">
+                      <form method="POST" action="/pay_verify" name="frm_verify" class="form-inline">
                           @csrf
                           @method('patch')      
 
                           <input type="text" name="kdBooking" id="kdBooking" class="form-control" value="{{ $CCredits->nomor_tagihan}}" placeholder="Ketikan nomor tagihan anda..." > 
-                           <input type="submit" class="btn btn-danger mt-3" name="chkBooking" id="chkBooking" value="Check" >                    
+                           <input type="submit" class="btn btn-danger btn-lg ml-2" name="chkBooking" id="chkBooking" value="Check" >                    
                           </form>                                               
                       </div>                          
                   </div>
                   <form method="POST" action="/pay_verify" name="post_Verify">
-                  @csrf      
+                  @csrf                                        
+                  <!-- <div class="form-group row">
+                      <label for="trans_bank" class="col-sm-3 ml-4 col-form-label" >Transfer Bank</label> 
+                      <div class="col-sm-8">
+                          <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Jenis Rekening" value="{{ $CCredits->nm_ATM}}" disabled >
+                          <input type="hidden" name="Hid_kdBooking" id="Hid_kdBooking" value="{{ $CCredits->nomor_tagihan}}" > 
+                      </div>                     
+                   </div> -->
+
+                   <div class="form-group row">
+                      <label for="nm_Paket" class="col-sm-3 ml-4 col-form-label" >Paket</label> 
+                      <div class="col-sm-8">
+                          <input type="text" name="nm_Paket" id="nm_Paket" class="form-control" value="{{ $CCredits->nama_paket}}" placeholder="Nama Paket yang dibeli..." disabled> 
+                      </div>                     
+                  </div>
+
+                  <div class="form-group row">
+                      <label for="jml_nominal" class="col-sm-3 ml-4 col-form-label" >Harga</label> 
+                      <div class="col-sm-8">       
+                           @if(isset($CCredits->nominal))                  
+                              <input type="text" name="jml_nominal" id="jml_nominal" class="form-control" value= "{{number_format($CCredits->nominal,2,",",".")}}" placeholder="Harga Paket..." disabled >
+                           @endif
+                      </div>                     
+                  </div>
+
+                  <div class="form-group row">
+                     <input type="bts_Rpem" name="bts_Rpem" id="bts_Rpem" class="form-control bg-primary text-white " value="Rekening Pembeli" disabled >
+                  </div>
+
                   <div class="form-group row">
                       <label for="trans_bank" class="col-sm-3 ml-4 col-form-label" >Transfer Bank</label> 
                       <div class="col-sm-8">
-                          <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Jenis Rekening" value="{{ $CCredits->nm_ATM}}" readonly >
+                          <input type="text" name="trans_bank" id="trans_bank" class="form-control" placeholder="Rekening Bank" value="{{ $CCredits->nm_ATM}}" disabled >
                           <input type="hidden" name="Hid_kdBooking" id="Hid_kdBooking" value="{{ $CCredits->nomor_tagihan}}" > 
                       </div>                     
-                  </div>
+                   </div>
 
                   <div class="form-group row">
-                     <input type="bts_Rpem" name="bts_Rpem" id="bts_Rpem" class="form-control bg-primary text-white " value="Rekening Pembeli" readonly >
-                  </div>
-
-                  <div class="form-group row">
-                      <label for="rek_Buyer" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
+                      <label for="rek_BuyerEx" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening
+                            <span class="errRequired">*</span> 
+                      </label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rek_Buyer" id="rek_Buyer" class="form-control" placeholder="Nomor Rekening anda" >
+                          <input type="text" name="rek_BuyerEx" id="rek_BuyerEx" class="form-control @error('rek_BuyerEx') is-invalid @enderror" placeholder="Ketik nomor rekening anda... " style="background-color: #e8f0fd">
+
+                           @error('rek_BuyerEx')<div class="invalid-feedback">{{ 'Tolong isi nomor rekening anda..!'}}</div>@enderror
                       </div>                     
                   </div>
 
                   <div class="form-group row">
-                      <label for="rNm_Buyer" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
+                      <label for="rNm_BuyerEx" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening
+                            <span class="errRequired">*</span> 
+                      </label> 
                       <div class="col-sm-8">
-                          <input type="text" name="rNm_Buyer" id="rNm_Buyer" class="form-control" placeholder="Nama Pemilik Rekening" >
-                      </div>                     
-                  </div>
+                          <input type="text" name="rNm_BuyerEx" id="rNm_BuyerEx" class="form-control @error('rNm_BuyerEx') is-invalid @enderror" placeholder="Ketik nama yang terdaftar atas rekening ini..." style="background-color: #e8f0fd">
 
-                  <div class="form-group row">
-                     <input type="bts_Rpen" name="bts_Rpen" id="bts_Rpen" class="form-control bg-danger text-white " value="Rekening Penjual" readonly >
-                  </div>
-
-                  <div class="form-group row">
-                      <label for="rek_No" class="col-sm-3 ml-4 col-form-label" >Nomor Rekening</label> 
-                      <div class="col-sm-8">
-                          <input type="text" name="rek_No" id="rek_No" class="form-control" placeholder="Nomor Rekening anda" value="{{ $CCredits->noRek}}" readonly>
+                          @error('rNm_BuyerEx')<div class="invalid-feedback">{{ 'Tolong isi nama yang terdaftar untuk rekening ini..!'}}</div>@enderror
                       </div>                     
-                  </div>
-
-                  <div class="form-group row">
-                      <label for="rek_Name" class="col-sm-3 ml-4 col-form-label" >Pemilik Rekening</label> 
-                      <div class="col-sm-8">
-                          <input type="text" name="rek_Name" id="rek_Name" class="form-control" placeholder="Nama Pemilik Rekening" value="{{ $CCredits->nmRek}}" readonly>
-                      </div>                     
-                  </div>
+                  </div>                 
 
                   <button type="submit" class="btn btn-info form-control" name="btn_post_Verify">Process</button>
                </form>                
