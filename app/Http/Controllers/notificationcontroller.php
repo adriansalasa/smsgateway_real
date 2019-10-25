@@ -181,36 +181,38 @@ class notificationcontroller extends Controller
                             'create_datetime' => $timeHour,
                             'delete_datetime' => '',
                             'flag_deleted' => 0   
-                        ]);            
+                        ]);    
+
+                   $FCredits = DB::table('Playsms_BuyCredit')->whereIn('idTagihan',$updatesData_id_array)->update([ 'confirmYn' => 'Y' ]);     
+
+                $msgToSend = "Selamat Pembelian Paket " . $nmPaket . "," . " Berhasil";
+                $sms_footer = "Graha Mitra Teguh";
+                $noTlp = "+6282298321921";
+
+                $datas = file_get_contents('http://192.168.5.31/index.php?app=ws&u='.Auth::user()->username.'&h='.Auth::user()->token.'&op=pv&to='.$noTlp.'&msg='.$msgToSend.'&footer='.$sms_footer);
+
+                $data = json_decode($datas, true);
+
+                $result = [];
+                foreach ($data['data'] as $item)
+                {
+                    $result[] = $item['status'];
+                }
+
+                if(in_array("ERR", $result))
+                {
+                    $result_no = array_count_values($result)["ERR"];
+                }else{
+                    $result_no = 0;
+                }
+
+                $terkirim = count($result) - $result_no;     
             }
                            
-            $FCredits = DB::table('Playsms_BuyCredit')->whereIn('idTagihan',$updatesData_id_array)->update([
-            'confirmYn' => 'Y'
-            ]);
-
-            $msgToSend = "Selamat Pembelian Paket " . $nmPaket . "," . " Berhasil";
-            $sms_footer = "Graha Mitra Teguh";
-            $noTlp = "+6282298321921";
-
-            $datas = file_get_contents('http://192.168.5.31/index.php?app=ws&u='.Auth::user()->username.'&h='.Auth::user()->token.'&op=pv&to='.$noTlp.'&msg='.$msgToSend.'&footer='.$sms_footer);
-
-            $data = json_decode($datas, true);
-
-            $result = [];
-            foreach ($data['data'] as $item)
-            {
-                $result[] = $item['status'];
-            }
-
-            if(in_array("ERR", $result))
-            {
-                $result_no = array_count_values($result)["ERR"];
-            }else{
-                $result_no = 0;
-            }
-
-            $terkirim = count($result) - $result_no;   
-
+            // $FCredits = DB::table('Playsms_BuyCredit')->whereIn('idTagihan',$updatesData_id_array)->update([
+            // 'confirmYn' => 'Y'
+            // ]);             
+            
             echo 'Paket telah dikonfirmasi...!';
     }
 
