@@ -29,7 +29,7 @@ class confirmcontroller extends Controller
         $hrgPaket = $request->isiHrgDb; 
         $tmpHour= date("md");  
         $tmpNomor = $request->noBill;
-        $tmpNobill = $tmpHour . '' . $tmpNomor;           
+        $tmpNobill = $tmpHour . '' . $tmpNomor;   
 
         $cntBuy = buycredit::max('idTagihan');
 
@@ -43,6 +43,8 @@ class confirmcontroller extends Controller
             $tmpNobill = ((int)$tmpNobill) + 1 ;
         }
 
+        
+		
     	DB::table('Playsms_BuyCredit')->insert([
     		'nomor_tagihan' =>  $tmpNobill,
             'nama_paket' => $request->nmPaket,
@@ -82,30 +84,8 @@ class confirmcontroller extends Controller
     	// 	'delete_datetime' => "",
     	// 	'flag_deleted' => 0
     	// ]);  
-        $msgToSend = "Pembelian Paket " . $request->nmPaket . "," . " Nomor Tagihan anda adalah " .$tmpNobill. "," . " Silahkan transfer ke rekening berikut:" . $request->noRekv . " A\N :" . $request->namaRek;
-        $sms_footer = "Graha Mitra Teguh";
-        $noTlp = "+6282298321921";
-
-        $datas = file_get_contents('http://192.168.5.31/index.php?app=ws&u='.Auth::user()->username.'&h='.Auth::user()->token.'&op=pv&to='.$noTlp.'&msg='.$msgToSend.'&footer='.$sms_footer);
-
-        $data = json_decode($datas, true);
-
-        $result = [];
-        foreach ($data['data'] as $item)
-        {
-            $result[] = $item['status'];
-        }
-
-        if(in_array("ERR", $result))
-        {
-            $result_no = array_count_values($result)["ERR"];
-        }else{
-            $result_no = 0;
-        }
-
-        $terkirim = count($result) - $result_no;
     	
-        return redirect('/topup')->with('status', 'Segera Bayar Tagihan anda. Pesan terkirim' .$terkirim. 'dan Pesan Gagal' .$result_no );    	 
+    	return redirect('/topup')->with('status', 'pembelian kuota kredit anda menunggu pembayaran!');    	 
     }
 
     public function update(Request $request, user_get $user_get)

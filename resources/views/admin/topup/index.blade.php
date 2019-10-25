@@ -55,7 +55,7 @@
   </div>   
 
   @if (session('status'))
-      <div id="disappear" class="alert alert-success alert-dismissible">
+      <div id="disappear" class="alert alert-warning alert-dismissible">
         <button type="button" class="close">&times;</button>
          <strong>Harap Dibayar...!</strong> {{ session('status') }}
       </div>

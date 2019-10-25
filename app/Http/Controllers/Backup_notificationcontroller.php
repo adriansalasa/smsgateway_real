@@ -91,7 +91,6 @@ class notificationcontroller extends Controller
 
             $jmlAmount = $FCredit->nominal;
             $userID = $FCredit->idUser;                                         
-            $nmPaket = $FCredit->nama_paket;
         } 
 
 
@@ -121,30 +120,7 @@ class notificationcontroller extends Controller
 
         $FCredits = DB::table('Playsms_BuyCredit')->where('idTagihan',$updatesData_id)->update([
         'confirmYn' => 'Y'
-        ]);
-
-        $msgToSend = "Selamat Pembelian Paket " . $nmPaket . "Berhasil" ;
-        $sms_footer = "Graha Mitra Teguh";
-        $noTlp = "+6282298321921";
-
-        $datas = file_get_contents('http://192.168.5.31/index.php?app=ws&u='.Auth::user()->username.'&h='.Auth::user()->token.'&op=pv&to='.$noTlp.'&msg='.$msgToSend.'&footer='.$sms_footer);
-
-        $data = json_decode($datas, true);
-
-        $result = [];
-        foreach ($data['data'] as $item)
-        {
-            $result[] = $item['status'];
-        }
-
-        if(in_array("ERR", $result))
-        {
-            $result_no = array_count_values($result)["ERR"];
-        }else{
-            $result_no = 0;
-        }
-
-        $terkirim = count($result) - $result_no;                                
+        ]);                                
 
         return redirect(route('admin.notification'))->with('success', 'Pengisian Paket Berhasil');
     }
@@ -160,8 +136,7 @@ class notificationcontroller extends Controller
            foreach($FCredits as $FCredit){     
 
                 $jmlAmount = $FCredit->nominal;
-                $userID = $FCredit->idUser;  
-                $nmPaket = $FCredit->nama_paket;                                       
+                $userID = $FCredit->idUser;                                         
              
                 $users = DB::table('playsms_tblUser')->where('uid', $userID)->get();               
                 foreach($users as $user){  
@@ -186,31 +161,7 @@ class notificationcontroller extends Controller
                            
             $FCredits = DB::table('Playsms_BuyCredit')->whereIn('idTagihan',$updatesData_id_array)->update([
             'confirmYn' => 'Y'
-            ]);
-
-            $msgToSend = "Selamat Pembelian Paket " . $nmPaket . "," . " Berhasil";
-            $sms_footer = "Graha Mitra Teguh";
-            $noTlp = "+6282298321921";
-
-            $datas = file_get_contents('http://192.168.5.31/index.php?app=ws&u='.Auth::user()->username.'&h='.Auth::user()->token.'&op=pv&to='.$noTlp.'&msg='.$msgToSend.'&footer='.$sms_footer);
-
-            $data = json_decode($datas, true);
-
-            $result = [];
-            foreach ($data['data'] as $item)
-            {
-                $result[] = $item['status'];
-            }
-
-            if(in_array("ERR", $result))
-            {
-                $result_no = array_count_values($result)["ERR"];
-            }else{
-                $result_no = 0;
-            }
-
-            $terkirim = count($result) - $result_no;   
-
+            ]);                  
             echo 'Paket telah dikonfirmasi...!';
     }
 
