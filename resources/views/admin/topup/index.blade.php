@@ -196,7 +196,7 @@
 
   //Hilangkan tampilan message with status dlm 2 detik
   $(document).ready( function() {
-    $('#disappear').delay(2000).fadeOut();
+    $('#disappear').delay(5000).fadeOut();
   });
 
   //Refresh jumlah saldo yang tersisa dlm 5 detik

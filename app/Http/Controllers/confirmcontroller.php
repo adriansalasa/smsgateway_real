@@ -63,7 +63,7 @@ class confirmcontroller extends Controller
             'in_sender' => '+myIM3',
             'in_receiver' =>  $request->isi_Tlp,
             'in_uid' =>  Auth::user()->uid,
-            'in_msg' => "Request Paket, klik Download untuk Cek Tagihan anda ",
+            'in_msg' => "Pembelian Paket" . $request->nmPaket . ", klik Download untuk Cek Tagihan anda ",
             'in_datetime' => now(),
             'reference_id' => $tmpNobill,
             'read_status' => 0

@@ -104,12 +104,7 @@ class InboxsController extends Controller
     }
 
     public function printPDF($id)
-    {
-       //This  $data array will be passed to our PDF blade
-       // $data = [
-       //    'title' => 'First PDF for Medium',
-       //    'heading' => 'Invoice',
-       //    'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged'];
+    {       
 
         $data = ['title' => 'Billing Isi Kuota'];
         $noBill = Inbox::where('in_id', $id)->first();    
@@ -121,14 +116,9 @@ class InboxsController extends Controller
         $tmpNmATM = $Cr->nm_ATM;
         $tmpNoRek = $Cr->noRek;
         $tmpNmRek = $Cr->nmRek;
-        
-        // $pdf = PDF::loadView('printPDF', $data);  
+                
         $pdf = PDF::loadView('admin.inbox.printPDF', $data, ['NoBill' => $tmpNoBill, 'Nominal' => $tmpNominal, 'NoTelp' => $tmpTelp, 'NoATM' => $tmpNmATM, 'NoRek' => $tmpNoRek, 'NmRek' => $tmpNmRek]);  
-        return $pdf->download('Bill_Paket.pdf');           
-        // echo $tmpNominal;
-        // echo $tmpTelp;
-        // echo $tmpNmATM;
-
+        return $pdf->download('Bill_Paket.pdf');
     }
 
     /**
